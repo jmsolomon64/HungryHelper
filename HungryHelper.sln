@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryHelper.WebAPI", "HungryHelper.WebAPI\HungryHelper.WebAPI.csproj", "{E92053C6-6B54-4A0C-9E05-4955D41E5F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryHelper.Data", "HungryHelper.Data\HungryHelper.Data.csproj", "{472614AF-14B2-44B1-99AB-7DF32DFCC607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryHelper.Models", "HungryHelper.Models\HungryHelper.Models.csproj", "{1BF85932-82FF-4596-871D-EF578931265F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryHelper.Services", "HungryHelper.Services\HungryHelper.Services.csproj", "{57F51946-2975-4669-BAEB-64EF4CD73CE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E92053C6-6B54-4A0C-9E05-4955D41E5F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92053C6-6B54-4A0C-9E05-4955D41E5F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92053C6-6B54-4A0C-9E05-4955D41E5F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92053C6-6B54-4A0C-9E05-4955D41E5F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{472614AF-14B2-44B1-99AB-7DF32DFCC607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472614AF-14B2-44B1-99AB-7DF32DFCC607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472614AF-14B2-44B1-99AB-7DF32DFCC607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472614AF-14B2-44B1-99AB-7DF32DFCC607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF85932-82FF-4596-871D-EF578931265F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF85932-82FF-4596-871D-EF578931265F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF85932-82FF-4596-871D-EF578931265F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF85932-82FF-4596-871D-EF578931265F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F51946-2975-4669-BAEB-64EF4CD73CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F51946-2975-4669-BAEB-64EF4CD73CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F51946-2975-4669-BAEB-64EF4CD73CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F51946-2975-4669-BAEB-64EF4CD73CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
