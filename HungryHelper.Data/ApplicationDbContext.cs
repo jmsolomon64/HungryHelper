@@ -1,3 +1,4 @@
+using HungryHelper.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HungryHelper.Data
@@ -6,5 +7,6 @@ namespace HungryHelper.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
+        public DbSet<ShoppingListEntity> ShoppingList { get; set; }
     }
 }
