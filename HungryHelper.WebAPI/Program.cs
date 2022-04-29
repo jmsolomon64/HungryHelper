@@ -1,8 +1,16 @@
+using HungryHelper.Data;
+using HungryHelper.Services.ShoppingList;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB");
 
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+// Add ShoppingList Service/Interface for Dependency Injection here
+builder.Services.AddScoped<IShoppingListService, ShoppingListService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
