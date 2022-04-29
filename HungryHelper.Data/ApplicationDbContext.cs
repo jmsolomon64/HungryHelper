@@ -13,5 +13,6 @@ namespace HungryHelper.Data
 
 
         public DbSet<RecipeEntity> Recipes {get; set;}
+        public DbSet<IngredientEntity> Ingredients {get; set;}
     }
 }
