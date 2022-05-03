@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using HungryHelper.Models.FavoritedRecipes;
 
 namespace HungryHelper.Services.FavoritedRecipes
 {
     public interface IFavoritedRecipesService
     {
-        
+        Task<bool> CreateFavoritedRecipesAsync(FavoritedRecipesCreate model);
     }
 }
