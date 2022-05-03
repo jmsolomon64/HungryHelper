@@ -28,5 +28,26 @@ namespace HungryHelper.Services.UserProfile
 
             return numberOfChanges == 1;
         }
+
+        public async Task<UserProfileDetail> GetUserProfileByIdAsync(int userProfileId)
+        {
+            var entity = await _context.UserProfile.FindAsync(userProfileId);
+            if (entity is null)
+                {
+                    return null;
+                }
+
+            var userProfileDetail = new UserProfileDetail
+            {
+                Id = entity.Id,
+                CookingExperienceLevel = entity.CookingExperienceLevel,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                FavoriteFood = entity.FavoriteFood,
+                DateJoined = entity.DateJoined
+            };
+
+            return userProfileDetail;
+        }
     }
 }

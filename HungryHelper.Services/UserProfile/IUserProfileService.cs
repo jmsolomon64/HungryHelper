@@ -6,5 +6,6 @@ namespace HungryHelper.Services.UserProfile
     public interface IUserProfileService
     {
         Task<bool> RegisterUserProfileAsync(UserProfileRegister model);
+        Task<UserProfileDetail> GetUserProfileByIdAsync(int userProfileId);
     }
 }

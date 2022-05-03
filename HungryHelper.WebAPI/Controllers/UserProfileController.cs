@@ -38,5 +38,18 @@ namespace HungryHelper.WebAPI.Controllers
             return BadRequest("User could not be registered");
         }
 
+        [HttpGet("{userProfileId:int}")]
+        public async Task<IActionResult> GetById([FromRoute] int userProfileId)
+        {
+            var userProfileDetail = await _service.GetUserProfileByIdAsync(userProfileId);
+
+            if (userProfileDetail is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userProfileDetail);
+        }
+
     }
 }
