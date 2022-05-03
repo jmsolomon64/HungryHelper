@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using HungryHelper.Data;
 using HungryHelper.Services.UserProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 // Dependency Injection
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
