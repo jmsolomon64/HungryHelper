@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Services.UserProfile;
+using HungryHelper.Models.UserProfile;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -16,6 +17,23 @@ namespace HungryHelper.WebAPI.Controllers
         public UserProfileController(IUserProfileService service)
         {
             _service = service;
+        }
+
+        [HttpPost("UserProfileRegister")]
+        public async Task<IActionResult> RegisterUserProfile([FromBody] UserProfileRegister model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var registerResult = await _service.RegisterUserProfileAsync(model);
+            if (registerResult)
+            {
+                return Ok("User Profile was registered.");
+            }
+
+            return BadRequest("User could not be registered");
         }
     }
 }
