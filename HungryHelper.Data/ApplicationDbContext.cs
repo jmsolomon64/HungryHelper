@@ -8,5 +8,8 @@ namespace HungryHelper.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
         public DbSet<ShoppingListEntity> ShoppingList { get; set; }
+        public DbSet<FavoritedRecipes> FavoritedRecipes { get; set; }
+
+
     }
 }
