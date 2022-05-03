@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HungryHelper.Models.FavoritedRecipes
 {
-    public class FavoritedRecipesCreate
+    public class FavoritedRecipesDelete
     {
         [Required]
-        public int UserId { get; set; }
-        
+        public int Id { get; set; }
+
         [Required]
-        public int RecipeId { get; set; }
+        public string RecipeId { get; set; }
     }
 }
