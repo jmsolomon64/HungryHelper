@@ -13,3 +13,4 @@ namespace HungryHelper.WebAPI.Controllers
             _service = service;
         }
     }
+}
