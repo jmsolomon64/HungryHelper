@@ -1,5 +1,6 @@
 using HungryHelper.Data;
 using HungryHelper.Services.ShoppingList;
+using HungryHelper.Services.FavoritedRecipes;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+// Add Favorited Recipes Service/Interface for Dependency Injection here
+builder.Services.AddScoped<IFavoritedRecipesService, FavoritedRecipeService>();
 
 // Add ShoppingList Service/Interface for Dependency Injection here
 builder.Services.AddScoped<IShoppingListService, ShoppingListService>();
