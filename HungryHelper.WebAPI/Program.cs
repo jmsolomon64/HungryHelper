@@ -1,4 +1,5 @@
 using HungryHelper.Data;
+using HungryHelper.Services.Ingredient;
 using HungryHelper.Services.Recipe;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext> (options => options.UseSqlSe
 
 //adds reipeservice/interface for dependency
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IIngredientServices, IngredientService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
