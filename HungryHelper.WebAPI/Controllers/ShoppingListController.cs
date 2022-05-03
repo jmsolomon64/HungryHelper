@@ -1,3 +1,4 @@
+using HungryHelper.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HungryHelper.WebAPI.Controllers
@@ -6,5 +7,10 @@ namespace HungryHelper.WebAPI.Controllers
     [ApiController]
     public class ShoppingListController : ControllerBase
     {
+        private readonly IShoppingListService _service;
+        public ShoppingListController(IShoppingListService service)
+        {
+            _service = service;
+        }
     }
 }

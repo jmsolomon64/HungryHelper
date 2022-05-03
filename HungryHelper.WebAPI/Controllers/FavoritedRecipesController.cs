@@ -1,3 +1,4 @@
+using HungryHelper.Services.FavoritedRecipes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HungryHelper.WebAPI.Controllers
@@ -6,5 +7,9 @@ namespace HungryHelper.WebAPI.Controllers
     [ApiController]
     public class FavoritedRecipesController : ControllerBase
     {
+        private readonly IFavoritedRecipesService _service;
+        public FavoritedRecipesController(IFavoritedRecipesService service)
+        {
+            _service = service;
+        }
     }
-}
