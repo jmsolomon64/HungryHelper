@@ -20,7 +20,9 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         [HttpPost("UserProfileRegister")]
-        public async Task<IActionResult> RegisterUserProfile([FromBody] UserProfileRegister model)
+        // Testing post using FromForm instead of FromBody (which was in the initial EN modules)
+        // public async Task<IActionResult> RegisterUserProfile([FromBody] UserProfileRegister model)
+        public async Task<IActionResult> RegisterUserProfile([FromForm] UserProfileRegister model)
         {
             if (!ModelState.IsValid)
             {
@@ -35,5 +37,6 @@ namespace HungryHelper.WebAPI.Controllers
 
             return BadRequest("User could not be registered");
         }
+
     }
 }
