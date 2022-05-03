@@ -49,5 +49,21 @@ namespace HungryHelper.Services.UserProfile
 
             return userProfileDetail;
         }
+
+        public async Task<bool> UpdateUserProfileAsync(UserProfileUpdate request)
+        {
+            // To do: validate profile is owned by the updating user
+            var userProfileEntity = await _context.UserProfile.FindAsync(request.Id);
+
+            // Updates the entities properties
+            userProfileEntity.CookingExperienceLevel = request.CookingExperienceLevel;
+            userProfileEntity.FirstName = request.FirstName;
+            userProfileEntity.LastName = request.LastName;
+            userProfileEntity.FavoriteFood = request.FavoriteFood;
+
+            // saves changes to the database and captures how many rows were updated
+            var numberOfChanges = await _context.SaveChangesAsync();
+            return numberOfChanges == 1;
+        }
     }
 }

@@ -7,5 +7,7 @@ namespace HungryHelper.Services.UserProfile
     {
         Task<bool> RegisterUserProfileAsync(UserProfileRegister model);
         Task<UserProfileDetail> GetUserProfileByIdAsync(int userProfileId);
+
+        Task<bool> UpdateUserProfileAsync(UserProfileUpdate request);
     }
 }
