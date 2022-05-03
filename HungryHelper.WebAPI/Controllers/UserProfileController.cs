@@ -51,5 +51,17 @@ namespace HungryHelper.WebAPI.Controllers
             return Ok(userProfileDetail);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserProfileById([FromForm] UserProfileUpdate request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return await _service.UpdateUserProfileAsync(request)
+                ? Ok("User Profile updated successfully.")
+                : BadRequest("Note could not be updated.");
+        }
     }
 }
