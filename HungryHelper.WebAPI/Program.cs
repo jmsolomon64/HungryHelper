@@ -11,7 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 // Add Favorited Recipes Service/Interface for Dependency Injection here
-builder.Services.AddScoped<IFavoritedRecipesService, FavoritedRecipeService>();
+builder.Services.AddScoped<IFavoritedRecipesService, FavoritedRecipesService>();
 
 // Add ShoppingList Service/Interface for Dependency Injection here
 builder.Services.AddScoped<IShoppingListService, ShoppingListService>();
