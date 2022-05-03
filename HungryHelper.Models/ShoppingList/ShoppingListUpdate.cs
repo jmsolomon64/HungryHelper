@@ -6,7 +6,7 @@ namespace HungryHelper.Models.ShoppingList
     public class ShoppingListUpdate
     {
         [Required]
-        public int UserId { get; set; }
+        public int ListId { get; set; }
         
         [Required]
         public string IngredientName { get; set; }

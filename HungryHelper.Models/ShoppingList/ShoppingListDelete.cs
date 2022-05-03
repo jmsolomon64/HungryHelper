@@ -7,5 +7,8 @@ namespace HungryHelper.Models.ShoppingList
     {
         [Required]
         public int ListId { get; set; }
+
+        [Required]
+        public string IngredientName { get; set; }
     }
 }
