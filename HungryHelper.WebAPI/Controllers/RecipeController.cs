@@ -15,7 +15,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
     {
         private readonly IRecipeService _service;  //instance of Iservice in API controller
 
-        public RecipeController(IRecipeService service)
+        public RecipeController(IRecipeService service) //class constructor
         {
             _service = service; //injects the service ****ASK ABOUT DEPENDENCY INJECTION CAUSE I GOT NOTHING****
         }

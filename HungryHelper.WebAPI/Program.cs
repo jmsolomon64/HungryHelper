@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext> (options => options.UseSqlSe
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IIngredientServices, IngredientService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(); // calls controllers from webapi 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
