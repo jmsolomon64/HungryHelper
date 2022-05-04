@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HungryHelper.Models.Recipe
 {
+    //This class is used to collect the information needed to register a recipe that the user will give (everything except Id and DateTime)
     public class RecipeRegister
     {
         [Required]

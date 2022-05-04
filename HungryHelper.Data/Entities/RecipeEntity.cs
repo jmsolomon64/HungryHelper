@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HungryHelper.Data.Entities
+namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the DB
 {
     public class RecipeEntity
     {

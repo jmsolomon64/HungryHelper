@@ -7,34 +7,36 @@ using HungryHelper.Services.Recipe;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HungryHelper.WebAPI.Controllers
+namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost layer of this system
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] //url that this controller can be accessed
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private readonly IRecipeService _service;
+        private readonly IRecipeService _service;  //instance of Iservice in API controller
 
         public RecipeController(IRecipeService service)
         {
-            _service = service;
+            _service = service; //injects the service ****ASK ABOUT DEPENDENCY INJECTION CAUSE I GOT NOTHING****
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterRecipe([FromBody] RecipeRegister model)
+        [HttpPost("Register")]  //Endpoint for api controller for post methods
+        //Method for registering recipes, takes on data collected from RecipeRegister
+        public async Task<IActionResult> RegisterRecipe([FromBody] RecipeRegister model) 
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) //checks to see if not valid
             {
                 return BadRequest(ModelState);
             }
 
-            var registerResult = await _service.RegisterRecipeAsync(model);
+            //variable holds results of method grabbed from service layer to register the recipe
+            var registerResult = await _service.RegisterRecipeAsync(model); //if valid will give Ok code 
             if (registerResult)
             {
                 return Ok("Recipe was registered"); 
             }
 
-            return BadRequest("Recipe couldn't be added."); 
+            return BadRequest("Recipe couldn't be added."); //catch all if neither other loops go off
         }
     }
 }

@@ -17,20 +17,20 @@ namespace HungryHelper.Services.Recipe
         }
 
         //Method takes in data from Recipe register model and uses it to help create a recipe entity
-        public async Task<bool> RegisterRecipeAsync(RecipeRegister model)
+        public async Task<bool> RegisterRecipeAsync(RecipeRegister model) //API Uses this method
         {
-            var entity = new RecipeEntity
+            var entity = new RecipeEntity //makes new RecipeEntity pulling from the model injected into this method
             {
                 Category = model.Category,
                 Name = model.Name,
                 Ingredients = model.Ingredients,
                 Measurements = model.Measurements,
                 Directions = model.Directions,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now //DateTime not in entity  will be figured out in this method
             };
 
-            _context.Recipes.Add(entity); //Entity 
-            var numberOfChanges = await _context.SaveChangesAsync(); //saves number of rows changed
+            _context.Recipes.Add(entity); //Entity added to dbset
+            var numberOfChanges = await _context.SaveChangesAsync(); //holds number of rows changed, will be given 1 if successful and 0 if not
 
             return numberOfChanges == 1; //will return bool determined by numberOfChanges being 1 or not
         }

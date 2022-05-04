@@ -6,8 +6,8 @@ using HungryHelper.Models.Recipe;
 
 namespace HungryHelper.Services.Recipe
 {
-    public interface IRecipeService
+    public interface IRecipeService //*** Gotta ask the difference between this and the lass with the I ****
     {
-        Task<bool> RegisterRecipeAsync(RecipeRegister model);
+        Task<bool> RegisterRecipeAsync(RecipeRegister model); //method for adding recipe
     }
 }
