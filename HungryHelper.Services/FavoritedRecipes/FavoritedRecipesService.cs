@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Data.Entities;
 
@@ -9,9 +11,9 @@ namespace HungryHelper.Services.FavoritedRecipes
 
         var entity = new FavoritedRecipesEntity
         {
-            Id = Models.Id,
-            UserId = model.
-            RecipeId
-        }
+            Id = model.Id,
+            UserId = model.UserId,
+            RecipeId = model.RecipeId
+        };
     }
 }
