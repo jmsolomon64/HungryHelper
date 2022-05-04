@@ -9,5 +9,7 @@ namespace HungryHelper.Services.UserProfile
         Task<UserProfileDetail> GetUserProfileByIdAsync(int userProfileId);
 
         Task<bool> UpdateUserProfileAsync(UserProfileUpdate request);
+
+        Task<bool> DeleteUserProfileAsync(int userProfileId);
     }
 }

@@ -63,5 +63,13 @@ namespace HungryHelper.WebAPI.Controllers
                 ? Ok("User Profile updated successfully.")
                 : BadRequest("Note could not be updated.");
         }
+
+        [HttpDelete("{userProfileId:int}")]
+        public async Task<IActionResult> DeleteUserProfileById([FromRoute] int userProfileId)
+        {
+            return await _service.DeleteUserProfileAsync(userProfileId)
+                ? Ok($"User Profile {userProfileId} was deleted successfully.")
+                : BadRequest($"User Profile {userProfileId} could not be deleted.");
+        }
     }
 }

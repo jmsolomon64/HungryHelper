@@ -52,8 +52,8 @@ namespace HungryHelper.Services.UserProfile
 
         public async Task<bool> UpdateUserProfileAsync(UserProfileUpdate request)
         {
-            // To do: validate profile is owned by the updating user
             var userProfileEntity = await _context.UserProfile.FindAsync(request.Id);
+            // To do: validate profile is owned by the updating user
 
             // Updates the entities properties
             userProfileEntity.CookingExperienceLevel = request.CookingExperienceLevel;
@@ -64,6 +64,15 @@ namespace HungryHelper.Services.UserProfile
             // saves changes to the database and captures how many rows were updated
             var numberOfChanges = await _context.SaveChangesAsync();
             return numberOfChanges == 1;
+        }
+
+        public async Task<bool> DeleteUserProfileAsync(int userProfileId)
+        {
+            var userProfileEntity = await _context.UserProfile.FindAsync(userProfileId);
+            // To do: validate profile is owned by the updating user
+
+            _context.UserProfile.Remove(userProfileEntity);
+            return await _context.SaveChangesAsync() == 1;
         }
     }
 }
