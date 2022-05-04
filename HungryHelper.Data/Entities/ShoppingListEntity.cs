@@ -10,6 +10,8 @@ namespace HungryHelper.Data.Entities
         [Required]
         public string IngredientName { get; set; }
 
+        public string Amount { get; set; }
+
         [Required]
         public DateTime DateAdded { get; set; }
         
