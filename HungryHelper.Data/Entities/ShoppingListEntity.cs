@@ -5,7 +5,7 @@ namespace HungryHelper.Data.Entities
     public class ShoppingListEntity
     {
         [Key]
-        public int Id { get; set; }
+        public int ListId { get; set; }
 
         [Required]
         public string IngredientName { get; set; }
