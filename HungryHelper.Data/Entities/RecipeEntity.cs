@@ -20,9 +20,6 @@ namespace HungryHelper.Data.Entities
         [MaxLength(100000)]
         public string Directions {get; set;}
         [Required]
-        //needs to be made into a foreign key
-        public int UserId {get; set;}
-        [Required]
         public DateTime CreatedDate {get; set;} //stores the time the recipe was made
     }
 }
