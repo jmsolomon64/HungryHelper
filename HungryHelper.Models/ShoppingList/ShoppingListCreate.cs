@@ -10,5 +10,7 @@ namespace HungryHelper.Models.ShoppingList
         
         [Required]
         public string IngredientName { get; set; }
+
+        public string Amount { get; set; }
     }
 }
