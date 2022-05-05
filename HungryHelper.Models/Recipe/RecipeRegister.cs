@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the DB
+namespace HungryHelper.Models.Recipe
 {
-    public class RecipeEntity
+    //This class is used to collect the information needed to register a recipe that the user will give (everything except Id and DateTime)
+    public class RecipeRegister
     {
-        [Key]
-        public int Id {get; set;}
         [Required]
         [MaxLength(100)]
         public string Category {get; set;}
@@ -14,14 +12,11 @@ namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the
         [MaxLength(100)]
         public string Name {get; set;}
         [Required]
-        [ForeignKey("Ingredient")]
         public List<int> Ingredients {get; set;} //intended to hold a list of foreign keys for ingredients
         [Required]
         public List<string> Measurements {get; set;}
         [Required]
         [MaxLength(100000)]
         public string Directions {get; set;}
-        [Required]
-        public DateTime CreatedDate {get; set;} //stores the time the recipe was made
     }
 }
