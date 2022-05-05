@@ -22,6 +22,51 @@ namespace HungryHelper.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("HungryHelper.Data.Entities.FavoritedRecipesEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FavoritedRecipes");
+                });
+
+            modelBuilder.Entity("HungryHelper.Data.Entities.ShoppingListEntity", b =>
+                {
+                    b.Property<int>("ListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListId"), 1L, 1);
+
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IngredientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ListId");
+
+                    b.ToTable("ShoppingList");
+
             modelBuilder.Entity("HungryHelper.Data.Entities.IngredientEntity", b =>
                 {
                     b.Property<int>("IngredientId")
