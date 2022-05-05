@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HungryHelper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220503010745_InitialUserProfileCreate")]
+    [Migration("20220505224337_InitialUserProfileCreate")]
     partial class InitialUserProfileCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
