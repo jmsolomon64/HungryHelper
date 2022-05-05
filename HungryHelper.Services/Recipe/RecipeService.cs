@@ -23,13 +23,18 @@ namespace HungryHelper.Services.Recipe
             {
                 Category = model.Category,
                 Name = model.Name,
-                // Measurements = model.Measurements,
                 Directions = model.Directions,
                 CreatedDate = DateTime.Now //DateTime not in entity  will be figured out in this method
             };
 
             _context.Recipes.Add(entity); //Entity added to dbset
             var numberOfChanges = await _context.SaveChangesAsync(); //holds number of rows changed, will be given 1 if successful and 0 if not
+
+            for (int i = 0; i < model.ListOfIngredients.Count; i ++)
+            {
+                int ingredientId = FindIngredientByName(model.ListOfIngredients[i]);
+                AddIngredientToRecipe(ingredientId, entity.RecipeId);
+            }
 
             return numberOfChanges == 1; //will return bool determined by numberOfChanges being 1 or not
         }
@@ -39,6 +44,12 @@ namespace HungryHelper.Services.Recipe
             var foundIngredient = _context.Ingredients.Single(i => i.IngredientId == ingredientId); //finds Ingredient by id
             var foundRecipe = _context.Recipes.Single(r => r.RecipeId == recipeId); //finds recipe by id
             foundRecipe.ListOfIngredients.Add(foundIngredient); //appends new ingredient into recipe's list of ingredient
+        }
+
+        public int FindIngredientByName(string name)
+        {
+            var foundIngredient = _context.Ingredients.Single(i => i.Name.ToUpper() == name.ToUpper()); //finds ingredient by name
+            return foundIngredient.IngredientId; //returns Id of ingredient
         }
     }
 }

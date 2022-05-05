@@ -11,9 +11,7 @@ namespace HungryHelper.Models.Recipe
         [Required]
         [MaxLength(100)]
         public string Name {get; set;}
-        
-        // [Required]
-        // public List<string> Measurements {get; set;}
+        public List<string> ListOfIngredients {get; set;}
         [Required]
         [MaxLength(100000)]
         public string Directions {get; set;}

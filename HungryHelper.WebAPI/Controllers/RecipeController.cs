@@ -39,5 +39,34 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
 
             return BadRequest("Recipe couldn't be added."); //catch all if neither other loops go off
         }
+
+        [HttpGet("View")]
+        public async Task<IActionResult> ViewAllRecipes()
+        {
+
+            return BadRequest("Invalid request");
+        }
+
+        [HttpGet("View/{id}")]
+        public async Task<IActionResult> ViewRecipeById([FromRoute] int recipeId)
+        {
+
+            return BadRequest("Invalid Request");
+        }
+
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> UpdateRecipeById([FromBody] RecipeRegister model)
+        {
+
+            return BadRequest("Invalid Request");
+        }
+
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteRecipeById([FromRoute] int recipeId)
+        {
+
+            return BadRequest();
+        }
     }
 }
