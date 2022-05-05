@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the DB
 {
@@ -13,6 +14,7 @@ namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the
         [MaxLength(100)]
         public string Name {get; set;}
         [Required]
+        [ForeignKey("Ingredient")]
         public List<int> Ingredients {get; set;} //intended to hold a list of foreign keys for ingredients
         [Required]
         public List<string> Measurements {get; set;}
