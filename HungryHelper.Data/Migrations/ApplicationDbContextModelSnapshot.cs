@@ -99,6 +99,38 @@ namespace HungryHelper.Data.Migrations
                         .HasForeignKey("ListOfRecipesRecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+            modelBuilder.Entity("HungryHelper.Data.Entities.UserProfileEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CookingExperienceLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateJoined")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FavoriteFood")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserProfile");
+
                 });
 #pragma warning restore 612, 618
         }
