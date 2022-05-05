@@ -41,5 +41,12 @@ namespace HungryHelper.Services.Ingredient
             //if there is an Entity with that name it will be returned if not, the value returned will be null
             return await _context.Ingredients.FirstOrDefaultAsync(ingredient => ingredient.Name.ToLower() == name.ToLower());
         }
+
+        public void AddRecipeToIngredient (int recipeId, int ingredientId)
+        {
+            var foundRecipe = _context.Recipes.Single(r => r.RecipeId == recipeId);
+            var foundIngredient = _context.Ingredients.Single(i => i.IngredientId == ingredientId);
+            foundIngredient.ListOfRecipes.Add(foundRecipe);
+        }
     }
 }

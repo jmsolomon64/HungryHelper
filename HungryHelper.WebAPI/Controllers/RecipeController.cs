@@ -19,6 +19,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         {
             _service = service; //injects the service ****ASK ABOUT DEPENDENCY INJECTION CAUSE I GOT NOTHING****
         }
+        
 
         [HttpPost("Register")]  //Endpoint for api controller for post methods
         //Method for registering recipes, takes on data collected from RecipeRegister

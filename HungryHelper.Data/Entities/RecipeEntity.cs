@@ -6,22 +6,24 @@ namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the
     public class RecipeEntity
     {
         [Key]
-        public int Id {get; set;}
+        public int RecipeId {get; set;}
         [Required]
         [MaxLength(100)]
         public string Category {get; set;}
         [Required]
         [MaxLength(100)]
         public string Name {get; set;}
-        [Required]
-        [ForeignKey("Ingredient")]
-        public List<int> Ingredients {get; set;} //intended to hold a list of foreign keys for ingredients
-        [Required]
-        public List<string> Measurements {get; set;}
+        public virtual ICollection<IngredientEntity> ListOfIngredients {get; set;}
+
         [Required]
         [MaxLength(100000)]
         public string Directions {get; set;}
         [Required]
         public DateTime CreatedDate {get; set;} //stores the time the recipe was made
+
+        public RecipeEntity()
+        {
+            ListOfIngredients = new HashSet<IngredientEntity>();
+        }
     }
 }
