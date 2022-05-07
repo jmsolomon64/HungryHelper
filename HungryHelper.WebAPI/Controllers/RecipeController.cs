@@ -31,7 +31,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             }
 
             //variable holds results of method grabbed from service layer to register the recipe
-            var registerResult = await _service.RegisterRecipeAsync(model); //if valid will give Ok code 
+            var registerResult = await _service.RegisterRecipeAsync(model);  
             if (registerResult)
             {
                 return Ok("Recipe was registered"); 

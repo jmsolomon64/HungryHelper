@@ -12,8 +12,8 @@
 //     [ApiController]
 //     public class IngredientController : ControllerBase
 //     {
-//         private readonly IIngredientServices _service; //creates instance of Iservice
-//         public IngredientController(IIngredientServices service) //dependency injection
+//         private readonly IIngredientService _service; //creates instance of Iservice
+//         public IngredientController(IIngredientService service) //dependency injection
 //         {
 //             _service = service;
 //         }
@@ -34,8 +34,8 @@ namespace HungryHelper.WebAPI.Controllers
     [ApiController]
     public class IngredientController : ControllerBase
     { //All this controller does is make sure requests are valid from user and then sends the data off to the service layer
-        private readonly IIngredientServices _service; //creates instance of Iservice
-        public IngredientController(IIngredientServices service) //dependency injection
+        private readonly IIngredientService _service; //creates instance of Iservice
+        public IngredientController(IIngredientService service) //dependency injection
         {
             _service = service;
         }

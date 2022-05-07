@@ -41,32 +41,6 @@ namespace HungryHelper.Data.Migrations
                     b.ToTable("FavoritedRecipes");
                 });
 
-            modelBuilder.Entity("HungryHelper.Data.Entities.ShoppingListEntity", b =>
-                {
-                    b.Property<int>("ListId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListId"), 1L, 1);
-
-                    b.Property<string>("Amount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IngredientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ListId");
-
-                    b.ToTable("ShoppingList");
-
             modelBuilder.Entity("HungryHelper.Data.Entities.IngredientEntity", b =>
                 {
                     b.Property<int>("IngredientId")
@@ -116,34 +90,32 @@ namespace HungryHelper.Data.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("IngredientEntityRecipeEntity", b =>
+            modelBuilder.Entity("HungryHelper.Data.Entities.ShoppingListEntity", b =>
                 {
-                    b.Property<int>("ListOfIngredientsIngredientId")
+                    b.Property<int>("ListId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ListOfRecipesRecipeId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListId"), 1L, 1);
+
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IngredientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ListOfIngredientsIngredientId", "ListOfRecipesRecipeId");
+                    b.HasKey("ListId");
 
-                    b.HasIndex("ListOfRecipesRecipeId");
-
-                    b.ToTable("IngredientEntityRecipeEntity");
+                    b.ToTable("ShoppingList");
                 });
-
-            modelBuilder.Entity("IngredientEntityRecipeEntity", b =>
-                {
-                    b.HasOne("HungryHelper.Data.Entities.IngredientEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ListOfIngredientsIngredientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HungryHelper.Data.Entities.RecipeEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ListOfRecipesRecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
             modelBuilder.Entity("HungryHelper.Data.Entities.UserProfileEntity", b =>
                 {
@@ -175,7 +147,36 @@ namespace HungryHelper.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserProfile");
+                });
 
+            modelBuilder.Entity("IngredientEntityRecipeEntity", b =>
+                {
+                    b.Property<int>("ListOfIngredientsIngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListOfRecipesRecipeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ListOfIngredientsIngredientId", "ListOfRecipesRecipeId");
+
+                    b.HasIndex("ListOfRecipesRecipeId");
+
+                    b.ToTable("IngredientEntityRecipeEntity");
+                });
+
+            modelBuilder.Entity("IngredientEntityRecipeEntity", b =>
+                {
+                    b.HasOne("HungryHelper.Data.Entities.IngredientEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ListOfIngredientsIngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HungryHelper.Data.Entities.RecipeEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ListOfRecipesRecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

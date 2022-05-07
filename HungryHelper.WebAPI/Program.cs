@@ -22,7 +22,7 @@ builder.Services.AddScoped<IShoppingListService, ShoppingListService>();
 
 //adds reipeservice/interface for dependency
 builder.Services.AddScoped<IRecipeService, RecipeService>();
-builder.Services.AddScoped<IIngredientServices, IngredientService>();
+builder.Services.AddScoped<IIngredientService, IngredientService>();
 
 builder.Services.AddControllers(); // calls controllers from webapi 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

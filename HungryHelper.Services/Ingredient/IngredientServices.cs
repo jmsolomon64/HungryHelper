@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HungryHelper.Services.Ingredient
 {
-    public class IngredientService : IIngredientServices
+    public class IngredientService : IIngredientService
     {
         private readonly ApplicationDbContext _context;
         public IngredientService(ApplicationDbContext context) //Constructor for service class, injects instance of DB into class
@@ -47,6 +47,15 @@ namespace HungryHelper.Services.Ingredient
             var foundRecipe = _context.Recipes.Single(r => r.RecipeId == recipeId);
             var foundIngredient = _context.Ingredients.Single(i => i.IngredientId == ingredientId);
             foundIngredient.ListOfRecipes.Add(foundRecipe);
+        }
+
+        public async Task<bool> AddIngredientFromRecipeAsync(string name)
+        {
+            var ingredient = new IngredientRegister()
+            {
+                Name = name
+            };
+            return await RegisterIngredientAsync(ingredient);
         }
     }
 }
