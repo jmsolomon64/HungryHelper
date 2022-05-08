@@ -50,14 +50,14 @@ namespace HungryHelper.Services.Recipe
 
             return numberOfChanges == 1; //will return bool determined by numberOfChanges being 1 or not
         }
-
+        //adds Ingredient to recipe by both of their Ids
         private void AddIngredientToRecipe(int ingredientId, int recipeId)
         {
             var foundIngredient = _context.Ingredients.Single(i => i.IngredientId == ingredientId); //finds Ingredient by id
             var foundRecipe = _context.Recipes.Single(r => r.RecipeId == recipeId); //finds recipe by id
             foundRecipe.ListOfIngredients.Add(foundIngredient); //appends new ingredient into recipe's list of ingredient
         }
-
+        //Finds ingredients in DB from recipe by ingredient name
         public int FindIngredientByName(string name)
         {
             var foundIngredient = _context.Ingredients.SingleOrDefault(i => i.Name.ToUpper() == name.ToUpper()); //finds ingredient by name
@@ -70,7 +70,7 @@ namespace HungryHelper.Services.Recipe
 
             return foundIngredient.IngredientId; //returns Id of ingredient
         }
-
+        //Finds recipe by the name and then returns the ID
         public int FindRecipeByName(string name)
         {
             var foundRecipe = _context.Recipes.SingleOrDefault(r => r.Name.ToUpper() == name.ToUpper());
@@ -79,6 +79,29 @@ namespace HungryHelper.Services.Recipe
                 return -1;
             }
             return foundRecipe.RecipeId;
+        }
+        //Finds The Recipe from the ID and returns The recipe Entity
+        public RecipeEntity ViewRecipeByName(int recipeId)
+        {
+            var recipe = _context.Recipes.SingleOrDefault(i => i.RecipeId == recipeId);
+
+            if (recipe == null)
+            {
+                return null;
+            }
+            return recipe;
+        }
+
+        public List<RecipeEntity> GetAllRecipes()
+        {
+            List<RecipeEntity> listofRecipes = new List<RecipeEntity>();
+            var recipes = _context.Recipes;
+            foreach (var recipe in recipes)
+            {
+                listofRecipes.Add(recipe);
+            }
+
+            return listofRecipes;
         }
     }
 }

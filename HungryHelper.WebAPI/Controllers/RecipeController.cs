@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HungryHelper.Data.Entities;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Services.Recipe;
 using Microsoft.AspNetCore.Http;
@@ -40,20 +41,40 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             return BadRequest("Recipe couldn't be added."); //catch all if neither other loops go off
         }
 
-        [HttpGet("View")]
+        [HttpGet("View/All")]
         public async Task<IActionResult> ViewAllRecipes()
         {
+            List<RecipeEntity> recipes = _service.GetAllRecipes();
+
+            if (recipes.Count > 0)
+            {
+                return Ok(recipes);
+            }
 
             return BadRequest("Invalid request");
         }
 
-        [HttpGet("View/{id}")]
-        public async Task<IActionResult> ViewRecipeById([FromRoute] int recipeId)
+        [HttpGet("View/Name")]
+        public async Task<IActionResult> ViewRecipeByName([FromBody] RecipeFind model)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var recipeId = _service.FindRecipeByName(model.Name);
+            if (recipeId <= 0)
+            {
+                return BadRequest("Recipe doesn't exist");
+            }
+
+            var recipe = _service.ViewRecipeByName(recipeId);
+
+            return Ok(recipe);
 
             return BadRequest("Invalid Request");
         }
-
+        
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateRecipeById([FromBody] RecipeRegister model)
         {
