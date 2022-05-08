@@ -75,9 +75,21 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             return BadRequest("Invalid Request");
         }
         
-        [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UpdateRecipeById([FromBody] RecipeRegister model)
+        [HttpPut("Update/Name")]
+        public async Task<IActionResult> UpdateRecipeById([FromBody] RecipeUpdate model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            int recipeId = _service.FindRecipeByName(model.CurrentName);
+            bool successful = await _service.UpdateRecipeById(recipeId, model);
+
+            if (successful)
+            {
+                return Ok("Changes made");
+            }
 
             return BadRequest("Invalid Request");
         }
