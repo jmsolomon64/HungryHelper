@@ -30,5 +30,18 @@ namespace HungryHelper.WebAPI.Controllers
 
             return BadRequest("A favorite recipe could not be added.");
         }
+
+        [HttpGet("{userProfileId:int}")]
+        public async Task<IActionResult> GetFavoritedRecipesByUserProfileId ([FromRoute] int userProfileId)
+        {
+            var favoritedRecipesResult = await _service.GetFavoritedRecipesByUserProfileIdAsync(userProfileId);
+
+            if (favoritedRecipesResult is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(favoritedRecipesResult);
+        }
     }
 }
