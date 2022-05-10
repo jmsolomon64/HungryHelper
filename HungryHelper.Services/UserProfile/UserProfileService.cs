@@ -16,6 +16,9 @@ namespace HungryHelper.Services.UserProfile
         {
             var entity = new UserProfileEntity
             {
+                Username = model.Username,
+                Password = model.Password,
+                // ConfirmPassword = model.ConfirmPassword,
                 CookingExperienceLevel = model.CookingExperienceLevel,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
