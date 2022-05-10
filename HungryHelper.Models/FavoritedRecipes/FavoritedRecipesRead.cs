@@ -6,6 +6,12 @@ namespace HungryHelper.Models.FavoritedRecipes
     public class FavoritedRecipesRead
     {
         [Required]
-        public int UserId { get; set; }
+        public int Id { get; set; }
+
+        [Required]
+        public int UserProfileId { get; set; }
+        
+        [Required]
+        public int RecipeId { get; set; }
     }
 }

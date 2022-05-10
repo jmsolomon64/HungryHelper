@@ -8,7 +8,7 @@ namespace HungryHelper.Data.Entities
         public int Id { get; set; }
         
         [Required]
-        public int UserId { get; set; }
+        public int UserProfileId { get; set; }
         // foreign key goes here
 
         [Required]
