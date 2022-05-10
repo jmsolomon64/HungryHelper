@@ -12,5 +12,22 @@ namespace HungryHelper.WebAPI.Controllers
         {
             _service = service;
         }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterFavoritedRecipes ([FromBody] FavoritedRecipesRegister model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var registerResult = await _service.RegisterFavoritedRecipesAsync(model);
+            if (registerResult)
+            {
+                return Ok("A favorite recipe was added.");
+            }
+
+            return BadRequest("A favorite recipe could not be added.");
+        }
     }
 }
