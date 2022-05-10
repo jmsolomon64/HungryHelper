@@ -1,5 +1,6 @@
 using HungryHelper.Services.FavoritedRecipes;
 using Microsoft.AspNetCore.Mvc;
+using HungryHelper.Models.FavoritedRecipes;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -14,14 +15,14 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterFavoritedRecipes ([FromBody] FavoritedRecipesRegister model)
+        public async Task<IActionResult> RegisterFavoritedRecipes ([FromBody] FavoritedRecipesCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var registerResult = await _service.RegisterFavoritedRecipesAsync(model);
+            var registerResult = await _service.CreateFavoritedRecipesAsync (model);
             if (registerResult)
             {
                 return Ok("A favorite recipe was added.");
