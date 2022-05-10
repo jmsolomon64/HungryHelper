@@ -27,9 +27,9 @@ namespace HungryHelper.Services.FavoritedRecipes
             return numberOfChanges == 1;
         }
 
-        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByUserProfileIdAsync(int userProfileId)
+        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByUserProfileIdAsync(int Id)
         {
-            var entity = await _context.FavoritedRecipes.FindAsync(userProfileId);
+            var entity = await _context.FavoritedRecipes.FindAsync(Id);
             if (entity is null)
                 {
                     return null;
@@ -43,6 +43,15 @@ namespace HungryHelper.Services.FavoritedRecipes
             };
 
             return favoritedRecipesEntity;
+        }
+
+        public async Task<bool> DeleteFavoritedRecipesAsync(int Id)
+        {
+            var FavoritedRecipesEntity = await _context.FavoritedRecipes.FindAsync(Id);
+            
+
+            _context.FavoritedRecipes.Remove(FavoritedRecipesEntity);
+            return await _context.SaveChangesAsync() == 1;
         }
     }
 }

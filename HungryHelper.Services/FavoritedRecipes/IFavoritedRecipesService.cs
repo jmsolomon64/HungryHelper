@@ -6,5 +6,6 @@ namespace HungryHelper.Services.FavoritedRecipes
     {
         Task<bool> CreateFavoritedRecipesAsync(FavoritedRecipesCreate model);
         Task<FavoritedRecipesRead> GetFavoritedRecipesByUserProfileIdAsync(int userProfileId);
+        Task<bool> DeleteFavoritedRecipesAsync(int userProfileId);
     }
 }
