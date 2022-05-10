@@ -17,7 +17,7 @@ namespace HungryHelper.Services.FavoritedRecipes
         {
             var entity = new FavoritedRecipesEntity
             {
-                UserId = model.UserId,
+                UserProfileId = model.UserProfileId,
                 RecipeId = model.RecipeId
             };
 
@@ -25,6 +25,24 @@ namespace HungryHelper.Services.FavoritedRecipes
             var numberOfChanges = await _context.SaveChangesAsync();
 
             return numberOfChanges == 1;
+        }
+
+        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByUserProfileIdAsync(int userProfileId)
+        {
+            var entity = await _context.FavoritedRecipes.FindAsync(userProfileId);
+            if (entity is null)
+                {
+                    return null;
+                }
+            
+            var favoritedRecipesEntity = new FavoritedRecipesRead
+            {
+                Id = entity.Id,
+                UserProfileId = entity.UserProfileId,
+                RecipeId = entity.RecipeId
+            };
+
+            return favoritedRecipesEntity;
         }
     }
 }
