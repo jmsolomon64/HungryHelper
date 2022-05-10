@@ -9,7 +9,7 @@ using HungryHelper.Services.UserProfile;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 // Add Favorited Recipes Service/Interface for Dependency Injection here
