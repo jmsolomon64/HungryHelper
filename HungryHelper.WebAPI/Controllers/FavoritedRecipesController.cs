@@ -34,7 +34,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpGet("{userProfileId:int}")]
         public async Task<IActionResult> GetFavoritedRecipesByUserProfileId ([FromRoute] int userProfileId)
         {
-            var favoritedRecipesResult = await _service.GetFavoritedRecipesByUserProfileIdAsync(userProfileId);
+            var favoritedRecipesResult = await _service.GetFavoritedRecipesByIdAsync(userProfileId);
 
             if (favoritedRecipesResult is null)
             {

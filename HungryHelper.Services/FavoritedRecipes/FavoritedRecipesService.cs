@@ -27,7 +27,7 @@ namespace HungryHelper.Services.FavoritedRecipes
             return numberOfChanges == 1;
         }
 
-        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByUserProfileIdAsync(int Id)
+        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByIdAsync(int Id)
         {
             var entity = await _context.FavoritedRecipes.FindAsync(Id);
             if (entity is null)
