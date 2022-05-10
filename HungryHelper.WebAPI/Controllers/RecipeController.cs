@@ -95,9 +95,25 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         }
 
 
-        [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteRecipeById([FromRoute] int recipeId)
+        [HttpDelete("Delete/Name")]
+        public async Task<IActionResult> DeleteRecipeById([FromBody] RecipeFind model)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            int recipeId = _service.FindRecipeByName(model.Name);
+            if (recipeId < 0)
+            {
+                return BadRequest("Recipe not found");
+            }
+
+            int rowsChanged = await _service.DeleteRecipeByIdAsync(recipeId);
+            if (rowsChanged > 0)
+            {
+                return Ok("Recipe Deleted");
+            }
 
             return BadRequest();
         }

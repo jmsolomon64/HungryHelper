@@ -14,5 +14,9 @@ namespace HungryHelper.Services.Recipe
 
         RecipeEntity ViewRecipeByName(int recipeId);
         List<RecipeEntity> GetAllRecipes();
+
+        Task<bool> UpdateRecipeById(int recipeId, RecipeUpdate model);
+
+        Task<int> DeleteRecipeByIdAsync(int recipeId);
     }
 }

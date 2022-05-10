@@ -46,6 +46,7 @@ namespace HungryHelper.Services.Recipe
             {
                 int ingredientId = FindIngredientByName(model.ListOfIngredients[i]); //uses i to get current index and uses string in index to find 
                 AddIngredientToRecipe(ingredientId, recipeId);
+                _ingredientS.AddRecipeToIngredient(recipeId, ingredientId);
             }
 
             return numberOfChanges == 1; //will return bool determined by numberOfChanges being 1 or not
@@ -102,6 +103,26 @@ namespace HungryHelper.Services.Recipe
             }
 
             return listofRecipes;
+        }
+
+        public async Task<bool> UpdateRecipeById(int recipeId, RecipeUpdate model)
+        {
+            RecipeEntity recipe = _context.Recipes.FirstOrDefault(i => i.RecipeId == recipeId);
+
+            recipe.Name = model.NewName;
+            recipe.Category = model.Category;
+            recipe.Directions = model.Directions;
+            var changes = await  _context.SaveChangesAsync(); 
+            
+            return changes <= 1;
+        }
+
+        public async Task<int> DeleteRecipeByIdAsync(int recipeId)
+        {
+            _context.Remove(_context.Recipes.SingleOrDefault(i => i.RecipeId == recipeId));
+
+            int rowsChanged = await _context.SaveChangesAsync();
+            return rowsChanged;
         }
     }
 }
