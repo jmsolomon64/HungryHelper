@@ -16,48 +16,36 @@ namespace HungryHelper.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterShoppingList ([FromBody] ShoppingListCreate model)
+        [HttpGet("{userId:int}")]
+        public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
         {
-            if (!ModelState.IsValid)
+            var shoppingList = await _service.GetAllShoppingListByUserIdAsync(userId);
+
+            if (shoppingList is null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            var registerResult = await _service.CreateShoppingListAsync (model);
-            if (registerResult)
-            {
-                return Ok("A shopping list was create.");
-            }
-
-            return BadRequest("A shopping list could not be created.");
+            return Ok(shoppingList);
         }
-
-        // [HttpGet("{userId:int}")]
-        // public async Task<IActionResult> GetShoppingListByUserId ([FromRoute] int userId)
-        // {
-        //     var shoppingListResult = await _service.GetShoppingListByUserIdAsync(userId);
-
-        //     if (shoppingListResult is null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     return Ok(shoppingListResult);
-        // }
-
-        // [HttpPut("{userId:int}")]
-        // public async Task<IActionResult> UpdateShoppingListById([FromForm] ShoppingListUpdate request)
+        
+        // [HttpPost("Register")]
+        // public async Task<IActionResult> RegisterShoppingList ([FromBody] ShoppingListCreate model)
         // {
         //     if (!ModelState.IsValid)
         //     {
         //         return BadRequest(ModelState);
         //     }
 
-        //     return await _service.UpdateShoppingListByIdAsync(request)
-        //         ? Ok("Shopping list updated successfully.")
-        //         : BadRequest("Shopping list could not be updated.");
+        //     var registerResult = await _service.CreateShoppingListAsync (model);
+        //     if (registerResult)
+        //     {
+        //         return Ok("A shopping list was created.");
+        //     }
+
+        //     return BadRequest("A shopping list could not be created.");
         // }
 
+        // GET api/ShoppingList
     }
 }
