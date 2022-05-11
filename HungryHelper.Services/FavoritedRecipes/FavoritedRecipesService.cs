@@ -28,7 +28,7 @@ namespace HungryHelper.Services.FavoritedRecipes
             return numberOfChanges == 1;
         }
 
-        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByIdAsync(int Id)
+        public async Task<FavoritedRecipesRead> GetFavoritedRecipesByUserIdAsync(int Id)
         {
             var entity = _context.FavoritedRecipes.FirstOrDefault( i => i.UserId == Id);
             if (entity is null)
@@ -46,9 +46,9 @@ namespace HungryHelper.Services.FavoritedRecipes
             return favoritedRecipesEntity;
         }
 
-        public async Task<bool> DeleteFavoritedRecipesAsync(int Id)
+        public async Task<bool> DeleteFavoritedRecipesByIdAsync(int Id)
         {
-            var FavoritedRecipesEntity = await _context.FavoritedRecipes.FindAsync(Id);
+            var FavoritedRecipesEntity = _context.FavoritedRecipes.FirstOrDefault( i => i.Id == Id);
             
 
             _context.FavoritedRecipes.Remove(FavoritedRecipesEntity);
