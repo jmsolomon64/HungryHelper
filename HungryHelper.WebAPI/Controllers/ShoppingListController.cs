@@ -1,9 +1,11 @@
 using HungryHelper.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.ShoppingList;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HungryHelper.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShoppingListController : ControllerBase
