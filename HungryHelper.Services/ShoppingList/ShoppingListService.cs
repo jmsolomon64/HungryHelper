@@ -11,7 +11,7 @@ namespace HungryHelper.Services.ShoppingList
     {
         private readonly int _userId; // establishing our _userId field
         private readonly ApplicationDbContext _dbContext; // Injecting our DbContext instance and assigning it to a new field
-        public ShoppingListService(IHttpContextAccessor httpContextAccessor)
+        public ShoppingListService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext dbContext)
         {
             var userClaims = httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
             var value = userClaims.FindFirst("Id")?.Value; // This is getting the user claims
@@ -19,7 +19,7 @@ namespace HungryHelper.Services.ShoppingList
                 if (!validId) // Handling an invalid Id
                     throw new Exception("Attempted to build ShoppingListService without User Id claim.");
 
-                _dbContext = DbContext;
+                _dbContext = dbContext;
         }
         private readonly ApplicationDbContext _context;
         public ShoppingListService(ApplicationDbContext context)
@@ -39,6 +39,7 @@ namespace HungryHelper.Services.ShoppingList
                     UtcCreated = entity.UtcAdded
                 })
                 .ToListAsync();
+                
             return shoppingList; 
         }
         // public async Task<bool> CreateShoppingListAsync(ShoppingListCreate model)
