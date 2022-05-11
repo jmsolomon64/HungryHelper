@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HungryHelper.Data.Entities
 {
@@ -13,10 +14,13 @@ namespace HungryHelper.Data.Entities
         public string Amount { get; set; }
 
         [Required]
-        public DateTime DateAdded { get; set; }
+        public DateTimeOffset UtcAdded { get; set; }
+
+        public DateTimeOffset? UtcModified { get; set; }
         
         [Required]
-        public int UserId { get; set; }
-        // foreign key goes here
+        [ForeignKey(nameof(Owner))]
+        public int OwnerId { get; set; }
+        public UserProfileEntity Owner { get; set; } // Data relationship with User Profile
     }
 }
