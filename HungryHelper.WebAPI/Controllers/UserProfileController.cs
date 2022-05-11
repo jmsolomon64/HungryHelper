@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Services.UserProfile;
 using HungryHelper.Models.UserProfile;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -38,6 +39,7 @@ namespace HungryHelper.WebAPI.Controllers
             return BadRequest("User could not be registered");
         }
 
+        [Authorize]
         [HttpGet("{userProfileId:int}")]
         public async Task<IActionResult> GetById([FromRoute] int userProfileId)
         {
