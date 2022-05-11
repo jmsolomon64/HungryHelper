@@ -14,5 +14,6 @@ namespace HungryHelper.Data.Entities
         public string FirstName { get; set;}
         public string LastName { get; set;}
         public string FavoriteFood { get; set;}
+        public List<ShoppingListEntity> ShoppingList { get; set; } // Data relationship with Shopping List
     }
 }
