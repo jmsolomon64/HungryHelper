@@ -6,11 +6,13 @@ namespace HungryHelper.Models.ShoppingList
     public class ShoppingListCreate
     {
         [Required]
-        public int UserId { get; set; }
+        [MinLength(2, ErrorMessage = "{0} must be at least {1} characters long.")]
+        [MaxLength(8000, ErrorMessage = "{0} must contain no more than {1} characters.")]
+        public string IngredientName { get; set; }
         
         [Required]
-        public string IngredientName { get; set; }
-
+        [MinLength(2, ErrorMessage = "{0} must be at least {1} characters long.")]
+        [MaxLength(100, ErrorMessage = "{0} must contain no more than {1} characters.")]
         public string Amount { get; set; }
     }
 }
