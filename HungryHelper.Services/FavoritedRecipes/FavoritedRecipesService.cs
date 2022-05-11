@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Data.Entities;
 using HungryHelper.Data;
+using System.Linq;
 
 namespace HungryHelper.Services.FavoritedRecipes
 {
@@ -17,7 +18,7 @@ namespace HungryHelper.Services.FavoritedRecipes
         {
             var entity = new FavoritedRecipesEntity
             {
-                UserProfileId = model.UserProfileId,
+                UserId = model.UserId,
                 RecipeId = model.RecipeId
             };
 
@@ -29,7 +30,7 @@ namespace HungryHelper.Services.FavoritedRecipes
 
         public async Task<FavoritedRecipesRead> GetFavoritedRecipesByIdAsync(int Id)
         {
-            var entity = await _context.FavoritedRecipes.FindAsync(Id);
+            var entity = _context.FavoritedRecipes.FirstOrDefault( i => i.UserId == Id);
             if (entity is null)
                 {
                     return null;
@@ -38,7 +39,7 @@ namespace HungryHelper.Services.FavoritedRecipes
             var favoritedRecipesEntity = new FavoritedRecipesRead
             {
                 Id = entity.Id,
-                UserProfileId = entity.UserProfileId,
+                UserId = entity.UserId,
                 RecipeId = entity.RecipeId
             };
 
