@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Services.UserProfile;
 using HungryHelper.Models.UserProfile;
 using Microsoft.AspNetCore.Authorization;
+using HungryHelper.Services.Token;
+using HungryHelper.Models.Token;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -14,10 +16,12 @@ namespace HungryHelper.WebAPI.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private readonly IUserProfileService _service;
-        public UserProfileController(IUserProfileService service)
+        private readonly IUserProfileService _userProfileService;
+        private readonly ITokenService _tokenService;
+        public UserProfileController(IUserProfileService userProfileService, ITokenService tokenService)
         {
-            _service = service;
+            _userProfileService = userProfileService;
+            _tokenService = tokenService;
         }
 
         [HttpPost("UserProfileRegister")]
@@ -30,7 +34,7 @@ namespace HungryHelper.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var registerResult = await _service.RegisterUserProfileAsync(model);
+            var registerResult = await _userProfileService.RegisterUserProfileAsync(model);
             if (registerResult)
             {
                 return Ok("User Profile was registered.");
@@ -43,7 +47,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpGet("{userProfileId:int}")]
         public async Task<IActionResult> GetById([FromRoute] int userProfileId)
         {
-            var userProfileDetail = await _service.GetUserProfileByIdAsync(userProfileId);
+            var userProfileDetail = await _userProfileService.GetUserProfileByIdAsync(userProfileId);
 
             if (userProfileDetail is null)
             {
@@ -61,7 +65,7 @@ namespace HungryHelper.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            return await _service.UpdateUserProfileAsync(request)
+            return await _userProfileService.UpdateUserProfileAsync(request)
                 ? Ok("User Profile updated successfully.")
                 : BadRequest("Note could not be updated.");
         }
@@ -69,9 +73,22 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpDelete("{userProfileId:int}")]
         public async Task<IActionResult> DeleteUserProfileById([FromRoute] int userProfileId)
         {
-            return await _service.DeleteUserProfileAsync(userProfileId)
+            return await _userProfileService.DeleteUserProfileAsync(userProfileId)
                 ? Ok($"User Profile {userProfileId} was deleted successfully.")
                 : BadRequest($"User Profile {userProfileId} could not be deleted.");
+        }
+
+        [HttpPost("~/api/Token")]
+        public async Task<IActionResult> Token([FromBody] TokenRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var tokenResponse = await _tokenService.GetTokenAsync(request);
+            if (tokenResponse is null)
+                return BadRequest("Invalid username or password");
+
+            return Ok(tokenResponse);
         }
     }
 }
