@@ -102,17 +102,22 @@ namespace HungryHelper.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("IngredientName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("UtcAdded")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("UtcModified")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("ListId");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("ShoppingList");
                 });
@@ -164,6 +169,17 @@ namespace HungryHelper.Data.Migrations
                     b.ToTable("IngredientEntityRecipeEntity");
                 });
 
+            modelBuilder.Entity("HungryHelper.Data.Entities.ShoppingListEntity", b =>
+                {
+                    b.HasOne("HungryHelper.Data.Entities.UserProfileEntity", "Owner")
+                        .WithMany("ShoppingList")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("IngredientEntityRecipeEntity", b =>
                 {
                     b.HasOne("HungryHelper.Data.Entities.IngredientEntity", null)
@@ -177,6 +193,11 @@ namespace HungryHelper.Data.Migrations
                         .HasForeignKey("ListOfRecipesRecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HungryHelper.Data.Entities.UserProfileEntity", b =>
+                {
+                    b.Navigation("ShoppingList");
                 });
 #pragma warning restore 612, 618
         }
