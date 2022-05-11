@@ -17,7 +17,7 @@ namespace HungryHelper.Services.ShoppingList
             {
                 IngredientName = model.IngredientName,
                 Amount = model.IngredientName,
-                DateAdded = DateTime.Now
+                UtcAdded = DateTime.Now
             };
 
             _context.ShoppingList.Add(entity);
