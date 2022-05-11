@@ -5,9 +5,6 @@ namespace HungryHelper.Services.ShoppingList
 {
     public interface IShoppingListService
     {
-        Task<bool> CreateShoppingListAsync(ShoppingListCreate model);
-
-
-
+        Task<IEnumerable<ShoppingListItem>> GetAllShoppingListByUserIdAsync();
     }
 }
