@@ -16,16 +16,11 @@ namespace HungryHelper.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpGet("{userId:int}")]
+        // GET api/ShoppingList
+        [HttpGet]
         public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
         {
-            var shoppingList = await _service.GetAllShoppingListByUserIdAsync(userId);
-
-            if (shoppingList is null)
-            {
-                return NotFound();
-            }
-
+            var shoppingList = await _service.GetAllShoppingListByUserIdAsync();
             return Ok(shoppingList);
         }
         
