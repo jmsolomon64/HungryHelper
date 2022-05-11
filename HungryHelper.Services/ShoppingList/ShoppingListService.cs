@@ -27,6 +27,22 @@ namespace HungryHelper.Services.ShoppingList
             _context = context;
         }
 
+        public async Task<bool> CreateShoppingListAsync(ShoppingListCreate request)
+        {
+            var shoppingListEntity = new ShoppingListEntity
+            {
+                IngredientName = request.IngredientName,
+                Amount = request.Amount,
+                UtcAdded = DateTimeOffset.Now,
+                OwnerId = _userId
+            };
+
+            _dbContext.ShoppingList.Add(shoppingListEntity);
+
+            var numberOfChanges = await _dbContext,SaveChangesAsync();
+            return numberOfChanges == 1;
+        }
+
         public async Task<IEnumerable<ShoppingListItem>> GetAllShoppingListByUserIdAsync()
         {
             var shoppingList = await _dbContext.ShoppingList
@@ -39,7 +55,7 @@ namespace HungryHelper.Services.ShoppingList
                     UtcCreated = entity.UtcAdded
                 })
                 .ToListAsync();
-                
+
             return shoppingList; 
         }
         // public async Task<bool> CreateShoppingListAsync(ShoppingListCreate model)
