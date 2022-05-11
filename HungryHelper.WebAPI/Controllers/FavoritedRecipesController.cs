@@ -31,10 +31,10 @@ namespace HungryHelper.WebAPI.Controllers
             return BadRequest("A favorite recipe could not be added.");
         }
 
-        [HttpGet("{userProfileId:int}")]
-        public async Task<IActionResult> GetFavoritedRecipesByUserProfileId ([FromRoute] int userProfileId)
+        [HttpGet("{userId:int}")]
+        public async Task<IActionResult> GetFavoritedRecipesByUserId ([FromRoute] int userId)
         {
-            var favoritedRecipesResult = await _service.GetFavoritedRecipesByIdAsync(userProfileId);
+            var favoritedRecipesResult = await _service.GetFavoritedRecipesByUserIdAsync(userId);
 
             if (favoritedRecipesResult is null)
             {
@@ -42,6 +42,14 @@ namespace HungryHelper.WebAPI.Controllers
             }
 
             return Ok(favoritedRecipesResult);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteFavoritedRecipesById ([FromRoute] int id)
+        {
+            return await _service.DeleteFavoritedRecipesByIdAsync(id)
+                ? Ok($"Favorite Recipe {id} was deleted successfully.")
+                : BadRequest($"Favorite Recipe {id} could not be deleted.");        
         }
     }
 }
