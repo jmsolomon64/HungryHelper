@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using HungryHelper.Models.UserProfile;
 using HungryHelper.Data;
 using HungryHelper.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace HungryHelper.Services.UserProfile
 {
@@ -17,14 +18,16 @@ namespace HungryHelper.Services.UserProfile
             var entity = new UserProfileEntity
             {
                 Username = model.Username,
-                Password = model.Password,
-                // ConfirmPassword = model.ConfirmPassword,
+                // Password = model.Password,
                 CookingExperienceLevel = model.CookingExperienceLevel,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 FavoriteFood = model.FavoriteFood,
                 DateJoined = DateTime.Now
             };
+
+            var passwordHasher = new PasswordHasher<UserProfileEntity>();
+            entity.Password = passwordHasher.HashPassword(entity, model.Password);
 
             _context.UserProfile.Add(entity);
             var numberOfChanges = await _context.SaveChangesAsync();
