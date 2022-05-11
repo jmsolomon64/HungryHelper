@@ -48,8 +48,8 @@ namespace HungryHelper.WebAPI.Controllers
         public async Task<IActionResult> DeleteFavoritedRecipesById ([FromRoute] int id)
         {
             return await _service.DeleteFavoritedRecipesByIdAsync(id)
-                ? Ok($"Favorite Recipe {id} was deleted successfully.")
-                : BadRequest($"Favorite Recipe {id} could not be deleted.");        
+                ? Ok($"Favorite recipe {id} was deleted successfully.")
+                : BadRequest($"Favorite recipe {id} could not be deleted.");        
         }
     }
 }
