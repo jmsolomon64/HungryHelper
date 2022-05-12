@@ -7,5 +7,7 @@ namespace HungryHelper.Services.ShoppingList
     {
         Task<bool> CreateShoppingListAsync(ShoppingListCreate request);
         Task<IEnumerable<ShoppingListItem>> GetAllShoppingListByUserIdAsync();
+
+        Task<bool> UpdateShoppingListAsync(ShoppingListUpdate request);
     }
 }
