@@ -6,8 +6,11 @@ using HungryHelper.Models.Ingredient;
 
 namespace HungryHelper.Services.Ingredient
 {
-    public interface IIngredientServices
+    public interface IIngredientService
     {
         Task<bool> RegisterIngredientAsync(IngredientRegister model); //Contrtact saying this method can be used ***Genuinely not sure on this one***
+
+        Task<bool> AddIngredientFromRecipeAsync(string name);
+        int AddRecipeToIngredient(int recipeId, int ingredientId);
     }
 }
