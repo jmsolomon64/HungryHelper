@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HungryHelper.WebAPI.Controllers
 {
-    // [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShoppingListController : ControllerBase
