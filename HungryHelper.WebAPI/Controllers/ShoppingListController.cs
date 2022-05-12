@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HungryHelper.WebAPI.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShoppingListController : ControllerBase
@@ -23,7 +23,7 @@ namespace HungryHelper.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (await _shoppingListService.CreateShoppingListAsync(request))
+            if (await _service.CreateShoppingListAsync(request))
                 return Ok("Shopping list created successfully.");
 
             return BadRequest("Shopping list could not be created.");
