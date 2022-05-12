@@ -39,7 +39,7 @@ namespace HungryHelper.Services.ShoppingList
 
             _dbContext.ShoppingList.Add(shoppingListEntity);
 
-            var numberOfChanges = await _dbContext,SaveChangesAsync();
+            var numberOfChanges = await _dbContext.SaveChangesAsync();
             return numberOfChanges == 1;
         }
 
