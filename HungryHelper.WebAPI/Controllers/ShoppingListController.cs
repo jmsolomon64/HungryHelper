@@ -16,6 +16,19 @@ namespace HungryHelper.WebAPI.Controllers
             _service = service;
         }
 
+        // POST api/ShoppingList
+        [HttpPost]
+        public async Task<IActionResult> CreateShoppingListAsync([FromBody] ShoppingListCreate request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (await _shoppingListService.CreateShoppingListAsync(request))
+                return Ok("Shopping list created successfully.");
+
+            return BadRequest("Shopping list could not be created.");
+        }
+
         // GET api/ShoppingList
         [HttpGet]
         public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
