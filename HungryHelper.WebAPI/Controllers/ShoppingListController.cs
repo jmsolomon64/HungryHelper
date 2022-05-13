@@ -36,24 +36,5 @@ namespace HungryHelper.WebAPI.Controllers
             var shoppingList = await _service.GetAllShoppingListByUserIdAsync();
             return Ok(shoppingList);
         }
-        
-        // [HttpPost("Register")]
-        // public async Task<IActionResult> RegisterShoppingList ([FromBody] ShoppingListCreate model)
-        // {
-        //     if (!ModelState.IsValid)
-        //     {
-        //         return BadRequest(ModelState);
-        //     }
-
-        //     var registerResult = await _service.CreateShoppingListAsync (model);
-        //     if (registerResult)
-        //     {
-        //         return Ok("A shopping list was created.");
-        //     }
-
-        //     return BadRequest("A shopping list could not be created.");
-        // }
-
-        // GET api/ShoppingList
     }
 }
