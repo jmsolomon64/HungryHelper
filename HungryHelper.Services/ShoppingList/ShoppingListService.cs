@@ -73,5 +73,19 @@ namespace HungryHelper.Services.ShoppingList
 
             return numberOfChanges == 1;
         }
+
+        public async Task<bool> DeleteShoppingListAsync(int ListId)
+        {
+            // Find the shopping list by the given Id
+            var entity = await _dbContext.ShoppingList.FindAsync(ListId);
+
+            // Validate the shopping list exists and is owned by the user
+            if (entity?.OwnerId != _userId)
+                return false;
+
+            // Remove the shopping list from the DbContext and assert that the one change was saved
+            _dbContext.ShoppingList.Remove(entity);
+            return await _dbContext.SaveChangesAsync() == 1;
+        }
     }
 }
