@@ -4,6 +4,7 @@ using HungryHelper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HungryHelper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220512224941_NewColumns")]
+    partial class NewColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,22 +109,17 @@ namespace HungryHelper.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("IngredientName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("UtcAdded")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("UtcModified")
-                        .HasColumnType("datetimeoffset");
-
                     b.HasKey("ListId");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("ShoppingList");
                 });
@@ -182,16 +179,6 @@ namespace HungryHelper.Data.Migrations
                     b.ToTable("IngredientEntityRecipeEntity");
                 });
 
-            modelBuilder.Entity("HungryHelper.Data.Entities.ShoppingListEntity", b =>
-                {
-                    b.HasOne("HungryHelper.Data.Entities.UserProfileEntity", "Owner")
-                        .WithMany("ShoppingList")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
             modelBuilder.Entity("HungryHelper.Data.Entities.FavoritedRecipesEntity", b =>
                 {
                     b.HasOne("HungryHelper.Data.Entities.RecipeEntity", null)
@@ -214,10 +201,6 @@ namespace HungryHelper.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HungryHelper.Data.Entities.UserProfileEntity", b =>
-                {
-                    b.Navigation("ShoppingList");
-                });
             modelBuilder.Entity("HungryHelper.Data.Entities.RecipeEntity", b =>
                 {
                     b.Navigation("ListOfFavorites");
