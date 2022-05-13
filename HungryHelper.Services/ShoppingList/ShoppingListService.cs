@@ -60,18 +60,37 @@ namespace HungryHelper.Services.ShoppingList
         }
         public async Task<bool> UpdateShoppingListAsync(ShoppingListUpdate request)
         {
+            // Find the shopping list and validate it's owned by the user
             var entity = await _dbContext.ShoppingList.FindAsync(request.ListId);
 
+            // By using the null conditional operator we can check if it's null at the same time we check the OwnerId
             if (entity?.OwnerId != _userId)
                 return false;
 
+            // Now we update the entity's properties
             entity.IngredientName = request.IngredientName;
             entity.Amount = request.Amount;
             entity.UtcModified = DateTimeOffset.Now;
             
+            // Saves the changes to the database and captures how many rows were updated
             var numberOfChanges = await _dbContext.SaveChangesAsync();
 
+            // numberOfChanges is stated to be equal to 1 because only one row should be updated
             return numberOfChanges == 1;
+        }
+
+        public async Task<bool> DeleteShoppingListAsync(int ListId)
+        {
+            // Find the shopping list by the given Id
+            var entity = await _dbContext.ShoppingList.FindAsync(ListId);
+
+            // Validate the shopping list exists and is owned by the user
+            if (entity?.OwnerId != _userId)
+                return false;
+
+            // Remove the shopping list from the DbContext and assert that the one change was saved
+            _dbContext.ShoppingList.Remove(entity);
+            return await _dbContext.SaveChangesAsync() == 1;
         }
     }
 }
