@@ -21,9 +21,12 @@ namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the
         [Required]
         public DateTime CreatedDate {get; set;} //stores the time the recipe was made
 
+        public virtual ICollection<FavoritedRecipesEntity> ListOfFavorites {get; set;}
+
         public RecipeEntity()
         {
             ListOfIngredients = new HashSet<IngredientEntity>();
+            ListOfFavorites = new HashSet<FavoritedRecipesEntity>();
         }
     }
 }
