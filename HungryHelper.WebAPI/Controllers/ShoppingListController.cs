@@ -48,5 +48,14 @@ namespace HungryHelper.WebAPI.Controllers
                 ? Ok("Shopping list updated successfully.")
                 : BadRequest("Shopping list could not be updated.");
         }
+
+        //DELETE api/ShoppingList
+        [HttpDelete("{listId:int")]
+        public async Task<IActionResult> DeleteShoppingList([FromRoute] int listId)
+        {
+            return await _service.DeleteShoppingListAsync(listId)
+                ? Ok($"Shopping list {listId} was deleted successfully.")
+                : BadRequest($"Shopping list {listId} could not be deleted.");
+        }
     }
 }
