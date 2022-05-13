@@ -58,19 +58,20 @@ namespace HungryHelper.Services.ShoppingList
 
             return shoppingList; 
         }
-        // public async Task<bool> CreateShoppingListAsync(ShoppingListCreate model)
-        // {
-        //     var entity = new ShoppingListEntity
-        //     {
-        //         IngredientName = model.IngredientName,
-        //         Amount = model.IngredientName,
-        //         UtcAdded = DateTime.Now
-        //     };
+        public async Task<bool> UpdateShoppingListAsync(ShoppingListUpdate request)
+        {
+            var entity = await _dbContext.ShoppingList.FindAsync(request.ListId);
 
-        //     _context.ShoppingList.Add(entity);
-        //     var numberOfChanges = await _context.SaveChangesAsync();
+            if (entity?.OwnerId != _userId)
+                return false;
 
-        //     return numberOfChanges == 1;
-        // }
+            entity.IngredientName = request.IngredientName;
+            entity.Amount = request.Amount;
+            entity.UtcModified = DateTimeOffset.Now;
+            
+            var numberOfChanges = await _dbContext.SaveChangesAsync();
+
+            return numberOfChanges == 1;
+        }
     }
 }
