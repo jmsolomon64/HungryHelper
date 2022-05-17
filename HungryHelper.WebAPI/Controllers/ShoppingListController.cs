@@ -2,6 +2,7 @@ using HungryHelper.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.ShoppingList;
 using Microsoft.AspNetCore.Authorization;
+using HungryHelper.Services.Token;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -11,9 +12,12 @@ namespace HungryHelper.WebAPI.Controllers
     public class ShoppingListController : ControllerBase
     {
         private readonly IShoppingListService _service;
-        public ShoppingListController(IShoppingListService service)
+        private readonly ITokenService _tokenService;
+
+        public ShoppingListController(IShoppingListService service, ITokenService tokenService)
         {
             _service = service;
+            _tokenService = tokenService;
         }
 
         // POST api/ShoppingList
