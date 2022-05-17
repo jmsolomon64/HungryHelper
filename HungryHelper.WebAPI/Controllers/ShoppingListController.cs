@@ -50,7 +50,7 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         //DELETE api/ShoppingList
-        [HttpDelete("{listId:int")]
+        [HttpDelete("{listId:int}")]
         public async Task<IActionResult> DeleteShoppingList([FromRoute] int listId)
         {
             return await _service.DeleteShoppingListAsync(listId)

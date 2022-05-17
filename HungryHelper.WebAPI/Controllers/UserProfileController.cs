@@ -27,7 +27,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpPost("UserProfileRegister")]
         // Testing post using FromForm instead of FromBody (which was in the initial EN modules)
         // public async Task<IActionResult> RegisterUserProfile([FromBody] UserProfileRegister model)
-        public async Task<IActionResult> RegisterUserProfile([FromForm] UserProfileRegister model)
+        public async Task<IActionResult> RegisterUserProfile([FromBody] UserProfileRegister model)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUserProfileById([FromForm] UserProfileUpdate request)
+        public async Task<IActionResult> UpdateUserProfileById([FromBody] UserProfileUpdate request)
         {
             if (!ModelState.IsValid)
             {
