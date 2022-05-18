@@ -12,13 +12,20 @@ namespace HungryHelper.Services.SeedData
 
         private void SeedUserProfiles()
         {
-            // check whether UserProfile table has records in it
-            
+            // returns the count of rows in the UserProfile table
+            int items = _context.UserProfile.Count();
             // if there are records, exit method
+            if (items == 0)
+            {
+                
+            }
             // if no records (or less than 2 or something), add seed data
         }
         private void SeedIngredients() {}
-        private void SeedRecipes() {}
+        private void SeedRecipes()
+        {
+            
+        }
         private void SeedShoppingList() {}
         private void SeedFavoritedRecipes() {}
     }
