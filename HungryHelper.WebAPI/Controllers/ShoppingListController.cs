@@ -38,7 +38,7 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         // PUT api/ShoppingList
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateShoppingListById([FromBody] ShoppingListUpdate request)
         {
             if (!ModelState.IsValid)
