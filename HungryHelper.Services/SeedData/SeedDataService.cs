@@ -1,5 +1,6 @@
 using HungryHelper.Data;
 using HungryHelper.Models.Recipe;
+using HungryHelper.Models.ShoppingList;
 using HungryHelper.Services.Recipe;
 using HungryHelper.Services.ShoppingList;
 
@@ -57,7 +58,25 @@ namespace HungryHelper.Services.SeedData
                 return false;
             }
         }
-        // private void SeedShoppingList() {}
+        public async Task<bool> SeedShoppingListAsync()
+        {
+            int items = _context.ShoppingList.Count();
+            if (items == 0)
+            {
+                var firstShoppingList = new ShoppingListCreate()
+                {
+                    IngredientName = "Avocado",
+                    Amount = "4",
+                };
+
+                return await _shoppingList.CreateShoppingListAsync(firstShoppingList);
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
         // private void SeedFavoritedRecipes() {}
     }
 }
