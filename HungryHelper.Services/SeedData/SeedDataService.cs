@@ -98,7 +98,5 @@ namespace HungryHelper.Services.SeedData
                 return false;
             }
         }
-
-        // private void SeedFavoritedRecipes() {}
     }
 }
