@@ -2,6 +2,7 @@ using HungryHelper.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.ShoppingList;
 using Microsoft.AspNetCore.Authorization;
+using HungryHelper.Services.SeedData;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -11,6 +12,9 @@ namespace HungryHelper.WebAPI.Controllers
     public class ShoppingListController : ControllerBase
     {
         private readonly IShoppingListService _service;
+        
+        private readonly ISeedDataService _seed;
+        
         public ShoppingListController(IShoppingListService service)
         {
             _service = service;
