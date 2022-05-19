@@ -33,38 +33,28 @@ namespace HungryHelper.Services.SeedData
             int items = _context.Recipes.Count();
             if (items == 0)
             {
-                List<string> listOfIngredients = new List<string>;
-                listOfIngredients.Add("Tuna");
-                listOfIngredients.Add("Noodle");
-                listOfIngredients.Add("Casserole");
-                string directions = "Throw it all in the pot and cook it up!";
+                var firstRecipe = new RecipeRegister()
+                {
+                    Category = "Lunch",
+                    Name = "Onions",
+                    ListOfIngredients = new List<string>()
+                    {
+                        "Onions",
+                        "Garlic powder",
+                        "Black Pepper",
+                        "salt"
+                    },
+                    Directions = "Slice the onions and add the seasoning, for the love of god"
+                };
 
-                // call register method, hard code like three recipes
-                var firstRecipe = new RecipeRegister("Dinner");
-                
                 return await _recipe.RegisterRecipeAsync(firstRecipe);
-
-                // var secondRecipe = new RecipeRegister()
-                // {
-                //     Category = "Lunch",
-                //     Name = "Onions",
-                //     ListOfIngredients = {
-                //         "Onions",
-                //         "Garlic powder",
-                //         "Black Pepper",
-                //         "salt"
-                //     },
-                //     Directions = "Slice the onions and add the seasoning, for the love of god"
-                // };
-
-                // return await _recipe.RegisterRecipeAsync(secondRecipe);
             }
             else 
             {
                 return false;
             }
         }
-        private void SeedShoppingList() {}
-        private void SeedFavoritedRecipes() {}
+        // private void SeedShoppingList() {}
+        // private void SeedFavoritedRecipes() {}
     }
 }
