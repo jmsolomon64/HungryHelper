@@ -15,9 +15,10 @@ namespace HungryHelper.WebAPI.Controllers
         
         private readonly ISeedDataService _seed;
         
-        public ShoppingListController(IShoppingListService service)
+        public ShoppingListController(IShoppingListService service, ISeedDataService seed)
         {
             _service = service;
+            _seed = seed;
         }
 
         // POST api/ShoppingList

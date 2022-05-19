@@ -13,9 +13,10 @@ namespace HungryHelper.WebAPI.Controllers
 
         private readonly ISeedDataService _seed;
 
-        public FavoritedRecipesController(IFavoritedRecipesService service)
+        public FavoritedRecipesController(IFavoritedRecipesService service, ISeedDataService seed)
         {
             _service = service;
+            _seed = seed;
         }
 
         [HttpPost("Register")]
