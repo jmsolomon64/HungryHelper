@@ -1,6 +1,7 @@
 using HungryHelper.Services.FavoritedRecipes;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.FavoritedRecipes;
+using HungryHelper.Services.SeedData;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -9,9 +10,13 @@ namespace HungryHelper.WebAPI.Controllers
     public class FavoritedRecipesController : ControllerBase
     {
         private readonly IFavoritedRecipesService _service;
-        public FavoritedRecipesController(IFavoritedRecipesService service)
+
+        private readonly ISeedDataService _seed;
+
+        public FavoritedRecipesController(IFavoritedRecipesService service, ISeedDataService seed)
         {
             _service = service;
+            _seed = seed;
         }
 
         [HttpPost("Register")]
@@ -34,6 +39,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpGet("{userId:int}")]
         public async Task<IActionResult> GetFavoritedRecipesByUserId ([FromRoute] int userId)
         {
+            await _seed.SeedFavoritedRecipesAsync(); // Calls method to add favorited recipes seed data to DB
             var favoritedRecipesResult = await _service.GetFavoritedRecipesByUserIdAsync(userId);
 
             if (favoritedRecipesResult is null)

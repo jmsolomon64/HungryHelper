@@ -2,6 +2,7 @@ using HungryHelper.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.ShoppingList;
 using Microsoft.AspNetCore.Authorization;
+using HungryHelper.Services.SeedData;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -11,9 +12,13 @@ namespace HungryHelper.WebAPI.Controllers
     public class ShoppingListController : ControllerBase
     {
         private readonly IShoppingListService _service;
-        public ShoppingListController(IShoppingListService service)
+        
+        private readonly ISeedDataService _seed;
+        
+        public ShoppingListController(IShoppingListService service, ISeedDataService seed)
         {
             _service = service;
+            _seed = seed;
         }
 
         // POST api/ShoppingList
@@ -33,6 +38,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
         {
+            await _seed.SeedShoppingListAsync();
             var shoppingList = await _service.GetAllShoppingListByUserIdAsync();
             return Ok(shoppingList);
         }

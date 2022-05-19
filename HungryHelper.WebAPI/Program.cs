@@ -10,12 +10,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using HungryHelper.Services.Token;
 using Microsoft.OpenApi.Models;
+using HungryHelper.Services.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("HungryHelperDB");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
 
 // This is setting up the HttpContext access for UserProfile and Shopping List
 builder.Services.AddHttpContextAccessor();
@@ -33,6 +34,9 @@ builder.Services.AddScoped<IIngredientService, IngredientService>();
 
 // token dependency injection
 builder.Services.AddScoped<ITokenService, TokenService>();
+
+//adds dependency injection for Seeding data
+builder.Services.AddScoped<ISeedDataService, SeedDataService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
     {
