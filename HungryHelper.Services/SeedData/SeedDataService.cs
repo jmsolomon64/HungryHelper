@@ -1,8 +1,12 @@
 using HungryHelper.Data;
+using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Models.UserProfile;
+using HungryHelper.Models.ShoppingList;
+using HungryHelper.Services.FavoritedRecipes;
 using HungryHelper.Services.Recipe;
 using HungryHelper.Services.UserProfile;
+using HungryHelper.Services.ShoppingList;
 
 namespace HungryHelper.Services.SeedData
 {
@@ -11,12 +15,15 @@ namespace HungryHelper.Services.SeedData
         private readonly ApplicationDbContext _context;
         private readonly IRecipeService _recipe;
         private readonly IUserProfileService _userProfile;
+        private readonly IShoppingListService _shoppingList;
+        private readonly IFavoritedRecipesService _favoritedRecipe;
 
-
-        public SeedDataService(ApplicationDbContext context, IRecipeService recipe, IUserProfileService userProfile)
+        public SeedDataService(ApplicationDbContext context, IRecipeService recipe, IShoppingListService shoppingList, IFavoritedRecipesService favoritedRecipe, IUserProfileService userProfile)
         {
             _context = context;
             _recipe = recipe;
+            _shoppingList = shoppingList;
+            _favoritedRecipe = favoritedRecipe;
             _userProfile = userProfile;
         }
 
@@ -104,6 +111,44 @@ namespace HungryHelper.Services.SeedData
             }
 
             return false;
+        }
+
+        public async Task<bool> SeedShoppingListAsync()
+        {
+            int items = _context.ShoppingList.Count();
+            if (items == 0)
+            {
+                var firstShoppingList = new ShoppingListCreate()
+                {
+                    IngredientName = "Avocado",
+                    Amount = "4",
+                };
+
+                return await _shoppingList.CreateShoppingListAsync(firstShoppingList);
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        
+        public async Task<bool> SeedFavoritedRecipesAsync()
+        {
+            int items = _context.FavoritedRecipes.Count();
+            if (items == 0)
+            {
+                var firstFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1005,
+                    RecipeId = 4,
+                };
+
+                return await _favoritedRecipe.CreateFavoritedRecipesAsync(firstFavoritedRecipe);
+            }
+            else 
+            {
+                return false;
+            }
         }
     }
 }

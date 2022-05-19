@@ -4,5 +4,7 @@ namespace HungryHelper.Services.SeedData
     {
         Task<bool> SeedRecipesAsync();
         Task<bool> SeedUserProfilesAsync();
+        Task<bool> SeedShoppingListAsync();
+        Task<bool> SeedFavoritedRecipesAsync();
     }
 }
