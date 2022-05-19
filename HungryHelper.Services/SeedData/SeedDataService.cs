@@ -1,6 +1,7 @@
 using HungryHelper.Data;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Services.Recipe;
+using HungryHelper.Services.ShoppingList;
 
 namespace HungryHelper.Services.SeedData
 {
@@ -8,12 +9,14 @@ namespace HungryHelper.Services.SeedData
     {
         private readonly ApplicationDbContext _context;
         private readonly IRecipeService _recipe;
+        private readonly IShoppingListService _shoppingList;
 
 
-        public SeedDataService(ApplicationDbContext context, IRecipeService recipe)
+        public SeedDataService(ApplicationDbContext context, IRecipeService recipe, IShoppingListService shoppingList)
         {
             _context = context;
             _recipe = recipe;
+            _shoppingList = shoppingList;
         }
 
         // private void SeedUserProfiles()
