@@ -37,6 +37,7 @@ namespace HungryHelper.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
         {
+            await _seed.SeedShoppingListAsync();
             var shoppingList = await _service.GetAllShoppingListByUserIdAsync();
             return Ok(shoppingList);
         }
