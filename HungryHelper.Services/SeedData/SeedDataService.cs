@@ -1,4 +1,5 @@
 using HungryHelper.Data;
+using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Models.ShoppingList;
 using HungryHelper.Services.Recipe;
@@ -70,6 +71,24 @@ namespace HungryHelper.Services.SeedData
                 };
 
                 return await _shoppingList.CreateShoppingListAsync(firstShoppingList);
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        public async Task<bool> SeedFavoritedRecipesAsync()
+        {
+            int items = _context.FavoritedRecipes.Count();
+            if (items == 0)
+            {
+                var firstFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1005,
+                    RecipeId = 4,
+                };
+
+                return await _favoritedRecipe.CreateFavoritedRecipesAsync(firstFavoritedRecipe);
             }
             else 
             {
