@@ -1,9 +1,11 @@
 using HungryHelper.Data;
 using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Models.Recipe;
+using HungryHelper.Models.UserProfile;
 using HungryHelper.Models.ShoppingList;
 using HungryHelper.Services.FavoritedRecipes;
 using HungryHelper.Services.Recipe;
+using HungryHelper.Services.UserProfile;
 using HungryHelper.Services.ShoppingList;
 
 namespace HungryHelper.Services.SeedData
@@ -12,16 +14,17 @@ namespace HungryHelper.Services.SeedData
     {
         private readonly ApplicationDbContext _context;
         private readonly IRecipeService _recipe;
+        private readonly IUserProfileService _userProfile;
         private readonly IShoppingListService _shoppingList;
         private readonly IFavoritedRecipesService _favoritedRecipe;
 
-
-        public SeedDataService(ApplicationDbContext context, IRecipeService recipe, IShoppingListService shoppingList, IFavoritedRecipesService favoritedRecipe)
+        public SeedDataService(ApplicationDbContext context, IRecipeService recipe, IShoppingListService shoppingList, IFavoritedRecipesService favoritedRecipe, IUserProfileService userProfile)
         {
             _context = context;
             _recipe = recipe;
             _shoppingList = shoppingList;
             _favoritedRecipe = favoritedRecipe;
+            _userProfile = userProfile;
         }
 
         // private void SeedUserProfiles()
@@ -62,6 +65,54 @@ namespace HungryHelper.Services.SeedData
                 return false;
             }
         }
+
+        public async Task<bool> SeedUserProfilesAsync()
+        {
+            int userCount = _context.UserProfile.Count();
+            if (userCount == 0)
+            {
+                var firstUser = new UserProfileRegister()
+                {
+                    Username = "UserOne",
+                    Password = "UserOnePassword",
+                    ConfirmPassword = "UserOnePassword",
+                    CookingExperienceLevel = "Low",
+                    FirstName = "User",
+                    LastName = "One",
+                    FavoriteFood = "Escargot"
+                };
+
+                var secondUser = new UserProfileRegister()
+                {
+                    Username = "UserTwo",
+                    Password = "UserTwoPassword",
+                    ConfirmPassword = "UserTwoPassword",
+                    CookingExperienceLevel = "High",
+                    FirstName = "User",
+                    LastName = "Two",
+                    FavoriteFood = "Onions"
+                };
+
+                var thirdUser = new UserProfileRegister()
+                {
+                    Username = "UserThree",
+                    Password = "UserThreePassword",
+                    ConfirmPassword = "UserThreePassword",
+                    CookingExperienceLevel = "Medium",
+                    FirstName = "User",
+                    LastName = "Three",
+                    FavoriteFood = "Pizza with or without Pineapple"
+                };
+
+                await _userProfile.RegisterUserProfileAsync(firstUser);
+                await _userProfile.RegisterUserProfileAsync(secondUser);
+                await _userProfile.RegisterUserProfileAsync(thirdUser);
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<bool> SeedShoppingListAsync()
         {
             int items = _context.ShoppingList.Count();
@@ -80,6 +131,7 @@ namespace HungryHelper.Services.SeedData
                 return false;
             }
         }
+        
         public async Task<bool> SeedFavoritedRecipesAsync()
         {
             int items = _context.FavoritedRecipes.Count();

@@ -9,6 +9,7 @@ using HungryHelper.Models.UserProfile;
 using Microsoft.AspNetCore.Authorization;
 using HungryHelper.Services.Token;
 using HungryHelper.Models.Token;
+using HungryHelper.Services.SeedData;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -18,10 +19,12 @@ namespace HungryHelper.WebAPI.Controllers
     {
         private readonly IUserProfileService _userProfileService;
         private readonly ITokenService _tokenService;
-        public UserProfileController(IUserProfileService userProfileService, ITokenService tokenService)
+        private readonly ISeedDataService _seedService;
+        public UserProfileController(IUserProfileService userProfileService, ITokenService tokenService, ISeedDataService seedService)
         {
             _userProfileService = userProfileService;
             _tokenService = tokenService;
+            _seedService = seedService;
         }
 
         [HttpPost("UserProfileRegister")]
@@ -44,9 +47,24 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ViewAllUserProfiles()
+        {
+            await _seedService.SeedUserProfilesAsync();
+            List<UserProfileDetail> userProfiles = _userProfileService.GetAllUserProfiles();
+            if (userProfiles is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userProfiles);
+        }
+
+        [Authorize]
         [HttpGet("{userProfileId:int}")]
         public async Task<IActionResult> GetById([FromRoute] int userProfileId)
         {
+            await _seedService.SeedUserProfilesAsync();
             var userProfileDetail = await _userProfileService.GetUserProfileByIdAsync(userProfileId);
 
             if (userProfileDetail is null)

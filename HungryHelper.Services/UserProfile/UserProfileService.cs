@@ -35,6 +35,27 @@ namespace HungryHelper.Services.UserProfile
             return numberOfChanges == 1;
         }
 
+        public List<UserProfileDetail> GetAllUserProfiles()
+        {
+            List<UserProfileDetail> listOfUsers = new List<UserProfileDetail>();
+            var users = _context.UserProfile;
+            foreach (var user in users)
+            {
+                var userDetail = new UserProfileDetail()
+                {
+                    Id = user.Id,
+                    CookingExperienceLevel = user.CookingExperienceLevel,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    FavoriteFood = user.FavoriteFood,
+                    DateJoined = user.DateJoined
+                    // Username = user.Username,
+                };
+
+                listOfUsers.Add(userDetail);
+            }
+            return listOfUsers;
+        }
         public async Task<UserProfileDetail> GetUserProfileByIdAsync(int userProfileId)
         {
             var entity = await _context.UserProfile.FindAsync(userProfileId);
