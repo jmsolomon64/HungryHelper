@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HungryHelper.Data.Entities;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Services.Recipe;
+using HungryHelper.Services.SeedData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,12 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
     {
         private readonly IRecipeService _service;  //instance of Iservice in API controller
 
-        public RecipeController(IRecipeService service) //class constructor
+        private readonly ISeedDataService _seed;
+
+        public RecipeController(IRecipeService service, ISeedDataService seed) //class constructor
         {
-            _service = service; //injects the service ****ASK ABOUT DEPENDENCY INJECTION CAUSE I GOT NOTHING****
+            _service = service; //injects the service 
+            _seed = seed;
         }
         
 
@@ -44,6 +48,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         [HttpGet("View/All")]
         public async Task<IActionResult> ViewAllRecipes()
         {
+            await _seed.SeedRecipesAsync();
             List<RecipeEntity> recipes = _service.GetAllRecipes();
 
             if (recipes.Count > 0)
@@ -57,6 +62,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         [HttpGet("View/Name")]
         public async Task<IActionResult> ViewRecipeByName([FromBody] RecipeFind model)
         {
+            await _seed.SeedRecipesAsync();
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

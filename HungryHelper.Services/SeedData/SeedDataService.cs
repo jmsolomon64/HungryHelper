@@ -8,6 +8,8 @@ namespace HungryHelper.Services.SeedData
     {
         private readonly ApplicationDbContext _context;
         private readonly IRecipeService _recipe;
+
+
         public SeedDataService(ApplicationDbContext context, IRecipeService recipe)
         {
             _context = context;
@@ -26,13 +28,13 @@ namespace HungryHelper.Services.SeedData
             // if no records (or less than 2 or something), add seed data
         }
 
-        private void SeedRecipes()
+        public async Task<bool> SeedRecipesAsync()
         {
             int items = _context.Recipes.Count();
             if (items == 0)
             {
                 // call register method, hard code like three recipes
-                RecipeRegister firstRecipe = new RecipeRegister
+                var firstRecipe = new RecipeRegister()
                 {
                     Category = "Dinner",
                     Name = "Tuna Noodle Casserole",
@@ -43,7 +45,9 @@ namespace HungryHelper.Services.SeedData
                     },
                     Directions = "Throw it all in the pot and cook it up!"
                 };
-                RecipeRegister secondRecipe = new RecipeRegister
+                await _recipe.RegisterRecipeAsync(firstRecipe);
+
+                var secondRecipe = new RecipeRegister()
                 {
                     Category = "Lunch",
                     Name = "Onions",
@@ -56,8 +60,11 @@ namespace HungryHelper.Services.SeedData
                     Directions = "Slice the onions and add the seasoning, for the love of god"
                 };
 
-                _recipe.RegisterRecipeAsync(firstRecipe);
-                _recipe.RegisterRecipeAsync(secondRecipe);
+                return await _recipe.RegisterRecipeAsync(secondRecipe);
+            }
+            else 
+            {
+                return false;
             }
         }
         private void SeedShoppingList() {}

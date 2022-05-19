@@ -6,6 +6,7 @@ using HungryHelper.Data;
 using HungryHelper.Data.Entities;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Services.Ingredient;
+using HungryHelper.Services.SeedData;
 
 namespace HungryHelper.Services.Recipe
 {
