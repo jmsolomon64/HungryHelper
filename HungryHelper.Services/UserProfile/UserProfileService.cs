@@ -3,6 +3,7 @@ using HungryHelper.Models.UserProfile;
 using HungryHelper.Data;
 using HungryHelper.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HungryHelper.Services.UserProfile
 {
@@ -15,6 +16,8 @@ namespace HungryHelper.Services.UserProfile
         }
         public async Task<bool> RegisterUserProfileAsync(UserProfileRegister model)
         {
+            // if 
+            
             var entity = new UserProfileEntity
             {
                 Username = model.Username,
@@ -100,6 +103,11 @@ namespace HungryHelper.Services.UserProfile
 
             _context.UserProfile.Remove(userProfileEntity);
             return await _context.SaveChangesAsync() == 1;
+        }
+
+        private async Task<UserProfileEntity> GetUserByUsernameAsync(string username)
+        {
+            return await _context.UserProfile.FirstOrDefaultAsync(user => user.Username.ToLower() == username.ToLower());
         }
     }
 }

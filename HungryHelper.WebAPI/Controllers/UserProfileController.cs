@@ -40,6 +40,8 @@ namespace HungryHelper.WebAPI.Controllers
             var registerResult = await _userProfileService.RegisterUserProfileAsync(model);
             if (registerResult)
             {
+                
+                
                 return Ok("User Profile was registered.");
             }
 
