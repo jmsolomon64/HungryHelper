@@ -48,7 +48,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         [HttpGet("View/All")]
         public async Task<IActionResult> ViewAllRecipes()
         {
-            await _seed.SeedRecipesAsync();
+            _seed.SeedRecipesAsync();
             List<RecipeEntity> recipes = _service.GetAllRecipes();
 
             if (recipes.Count > 0)
@@ -62,7 +62,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         [HttpGet("View/Name")]
         public async Task<IActionResult> ViewRecipeByName([FromBody] RecipeFind model)
         {
-            await _seed.SeedRecipesAsync();
+            _seed.SeedRecipesAsync();
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
