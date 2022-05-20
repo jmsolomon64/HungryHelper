@@ -54,14 +54,14 @@ namespace HungryHelper.Services.FavoritedRecipes
             {
                 var favRecipe = new FavoritedRecipesCreate()
                 {
-                    Id = favRecipe.Id,
-                    UserId = favRecipe.UserId,
-                    RecipeId = favRecipe.RecipeId
+                    Id = favoritedRecipe.Id,
+                    UserId = favoritedRecipe.UserId,
+                    RecipeId = favoritedRecipe.RecipeId
+                };
 
-                }
-            };
-
-            return favoritedRecipesEntity;
+                listOfFavoritedRecipes.Add(favRecipe);
+            }
+            return listOfFavoritedRecipes;
         }
 
         public async Task<bool> DeleteFavoritedRecipesByIdAsync(int Id)
