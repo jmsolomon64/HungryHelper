@@ -16,7 +16,10 @@ namespace HungryHelper.Services.UserProfile
         }
         public async Task<bool> RegisterUserProfileAsync(UserProfileRegister model)
         {
-            // if 
+            if (GetUserByUsernameAsync(model.Username) != null)
+            {
+                return false;
+            }
             
             var entity = new UserProfileEntity
             {
@@ -107,7 +110,8 @@ namespace HungryHelper.Services.UserProfile
 
         private async Task<UserProfileEntity> GetUserByUsernameAsync(string username)
         {
-            return await _context.UserProfile.FirstOrDefaultAsync(user => user.Username.ToLower() == username.ToLower());
+            var result = await _context.UserProfile.FirstOrDefaultAsync(user => user.Username.ToLower() == username.ToLower());
+            return result;
         }
     }
 }
