@@ -49,10 +49,10 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewAllFavoritedRecipes()
+        public async Task<IActionResult> GetAllFavoritedRecipes()
         {
             await _seed.SeedFavoritedRecipesAsync(); // Calls method to add favorited recipes seed data to DB
-            List<FavoritedRecipesCreate> favoritedRecipes = _service.GetAllFavoritedRecipes();
+            List<FavoritedRecipesCreate> favoritedRecipes = _service.ViewAllFavoritedRecipes();
 
             if (favoritedRecipes is null)
             {
