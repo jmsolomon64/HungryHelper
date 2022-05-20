@@ -75,6 +75,7 @@ namespace HungryHelper.WebAPI.Controllers
             return Ok(userProfileDetail);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateUserProfileById([FromBody] UserProfileUpdate request)
         {
@@ -88,6 +89,7 @@ namespace HungryHelper.WebAPI.Controllers
                 : BadRequest("Note could not be updated.");
         }
 
+        [Authorize]
         [HttpDelete("{userProfileId:int}")]
         public async Task<IActionResult> DeleteUserProfileById([FromRoute] int userProfileId)
         {

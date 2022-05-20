@@ -2,6 +2,7 @@ using HungryHelper.Services.FavoritedRecipes;
 using Microsoft.AspNetCore.Mvc;
 using HungryHelper.Models.FavoritedRecipes;
 using HungryHelper.Services.SeedData;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HungryHelper.WebAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace HungryHelper.WebAPI.Controllers
             _seed = seed;
         }
 
+        [Authorize]
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterFavoritedRecipes ([FromBody] FavoritedRecipesCreate model)
         {
@@ -36,6 +38,7 @@ namespace HungryHelper.WebAPI.Controllers
             return BadRequest("A favorite recipe could not be added.");
         }
 
+        [Authorize]
         [HttpGet("{userId:int}")]
         public async Task<IActionResult> GetFavoritedRecipesByUserId ([FromRoute] int userId)
         {
@@ -50,6 +53,7 @@ namespace HungryHelper.WebAPI.Controllers
             return Ok(favoritedRecipesResult);
         }
 
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteFavoritedRecipesById ([FromRoute] int id)
         {

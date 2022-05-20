@@ -6,6 +6,7 @@ using HungryHelper.Data.Entities;
 using HungryHelper.Models.Recipe;
 using HungryHelper.Services.Recipe;
 using HungryHelper.Services.SeedData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             return BadRequest("Recipe couldn't be added."); //catch all if neither other loops go off
         }
 
+        [Authorize]
         [HttpGet("View/All")]
         public async Task<IActionResult> ViewAllRecipes()
         {
@@ -59,6 +61,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             return BadRequest("Invalid request");
         }
 
+        [Authorize]
         [HttpGet("View/Name")]
         public async Task<IActionResult> ViewRecipeByName([FromBody] RecipeFind model)
         {
@@ -81,6 +84,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
             return BadRequest("Invalid Request");
         }
         
+        [Authorize]
         [HttpPut("Update/Name")]
         public async Task<IActionResult> UpdateRecipeById([FromBody] RecipeUpdate model)
         {
@@ -101,6 +105,7 @@ namespace HungryHelper.WebAPI.Controllers //This is on the client layer, topmost
         }
 
 
+        [Authorize]
         [HttpDelete("Delete/Name")]
         public async Task<IActionResult> DeleteRecipeById([FromBody] RecipeFind model)
         {

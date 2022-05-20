@@ -35,7 +35,7 @@ namespace HungryHelper.WebAPI.Controllers
         }
 
         // GET api/ShoppingList
-        [HttpGet]
+        [HttpGet("{listId:int}")]
         public async Task<IActionResult> GetAllShoppingListByUserId ([FromRoute] int userId)
         {
             await _seed.SeedShoppingListAsync();
