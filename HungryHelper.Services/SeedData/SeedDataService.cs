@@ -134,9 +134,10 @@ namespace HungryHelper.Services.SeedData
                     IngredientName = "Kosher salt",
                 };
 
-                return await _shoppingList.CreateShoppingListAsync(firstShoppingList);
-                return await _shoppingList.CreateShoppingListAsync(secondShoppingList);
-                return await _shoppingList.CreateShoppingListAsync(thirdShoppingList);
+                await _shoppingList.CreateShoppingListAsync(firstShoppingList);
+                await _shoppingList.CreateShoppingListAsync(secondShoppingList);
+                await _shoppingList.CreateShoppingListAsync(thirdShoppingList);
+                return true;
             }
             else 
             {
@@ -155,7 +156,22 @@ namespace HungryHelper.Services.SeedData
                     RecipeId = 4,
                 };
 
-                return await _favoritedRecipe.CreateFavoritedRecipesAsync(firstFavoritedRecipe);
+                var secondFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1006,
+                    RecipeId = 9,
+                };
+
+                var thirdFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1007,
+                    RecipeId = 12,
+                };
+
+                await _favoritedRecipe.CreateFavoritedRecipesAsync(firstFavoritedRecipe);
+                await _favoritedRecipe.CreateFavoritedRecipesAsync(secondFavoritedRecipe);
+                await _favoritedRecipe.CreateFavoritedRecipesAsync(thirdFavoritedRecipe);
+                return true;
             }
             else 
             {
