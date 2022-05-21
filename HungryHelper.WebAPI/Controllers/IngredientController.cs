@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HungryHelper.Data.Entities;
 using HungryHelper.Models.Ingredient;
 using HungryHelper.Services.Ingredient;
 using Microsoft.AspNetCore.Http;
@@ -58,5 +59,24 @@ namespace HungryHelper.WebAPI.Controllers
                 return BadRequest("Ingredient couldn't be registered");
             }
         }
+
+        // [HttpGet("View/All")]
+    
+        // public Task<IActionResult> ViewAllIngredients()
+        // {
+        //     {
+        //         List<IngredientEntity> listOfIngredients = new List<IngredientEntity>();
+
+        //         listOfIngredients = _service.GetAllIngredients();
+
+        //         if (listOfIngredients is null)
+        //         {
+        //             return NotFound();
+        //         }
+
+        //         return Ok(listOfIngredients);
+        //     }
+        // }
+    
     }
 }
