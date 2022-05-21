@@ -91,6 +91,8 @@ namespace HungryHelper.Services.SeedData
 
 
                 await _recipe.RegisterRecipeAsync(firstRecipe);
+                await _recipe.RegisterRecipeAsync(secondRecipe);
+                return await _recipe.RegisterRecipeAsync(thirdRecipe);
             }
             else 
             {
