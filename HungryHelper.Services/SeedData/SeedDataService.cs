@@ -58,7 +58,39 @@ namespace HungryHelper.Services.SeedData
                     Directions = "Slice the onions and add the seasoning, for the love of god"
                 };
 
-                return await _recipe.RegisterRecipeAsync(firstRecipe);
+                var secondRecipe = new RecipeRegister()
+                {
+                    Category = "Breakfast",
+                    Name = "Eggs",
+                    ListOfIngredients = new List<string>()
+                    {
+                        "Eggs",
+                        "Garlic powder",
+                        "Black Pepper",
+                        "salt"
+                    },
+                    Directions = "Crack eggs, add to pan, season with garlic powder, pepper, and salt to taste"
+                };
+
+                var thirdRecipe = new RecipeRegister()
+                {
+                    Category = "Dinner",
+                    Name = "Fried Chicken",
+                    ListOfIngredients = new List<string>()
+                    {
+                        "Chicken",
+                        "Garlic powder",
+                        "Black Pepper",
+                        "salt",
+                        "Eggs",
+                        "bread crumbs"
+                    },
+                    Directions = "mix seasonings with breadcrumbs, wash chicken in egg and batter with breadcrumbs, fry chicken till it's white inside and reaches an internal temperature of at least 165 degrees for five seconds."
+                };
+
+
+
+                await _recipe.RegisterRecipeAsync(firstRecipe);
             }
             else 
             {
