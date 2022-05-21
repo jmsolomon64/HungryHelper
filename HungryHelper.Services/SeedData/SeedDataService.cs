@@ -123,8 +123,20 @@ namespace HungryHelper.Services.SeedData
                     IngredientName = "Avocado",
                     Amount = "4",
                 };
+                
+                var secondShoppingList = new ShoppingListCreate()
+                {
+                    IngredientName = "Butter",
+                };
+
+                var thirdShoppingList = new ShoppingListCreate()
+                {
+                    IngredientName = "Kosher salt",
+                };
 
                 return await _shoppingList.CreateShoppingListAsync(firstShoppingList);
+                return await _shoppingList.CreateShoppingListAsync(secondShoppingList);
+                return await _shoppingList.CreateShoppingListAsync(thirdShoppingList);
             }
             else 
             {
