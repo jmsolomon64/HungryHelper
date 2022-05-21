@@ -44,6 +44,7 @@ namespace HungryHelper.Services.UserProfile
                 var userDetail = new UserProfileDetail()
                 {
                     Id = user.Id,
+                    Username = user.Username,
                     CookingExperienceLevel = user.CookingExperienceLevel,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -67,6 +68,7 @@ namespace HungryHelper.Services.UserProfile
             var userProfileDetail = new UserProfileDetail
             {
                 Id = entity.Id,
+                Username = entity.Username,
                 CookingExperienceLevel = entity.CookingExperienceLevel,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
