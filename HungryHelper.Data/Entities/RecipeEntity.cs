@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the DB
 {
@@ -13,6 +14,7 @@ namespace HungryHelper.Data.Entities //Holds what a Recipe will look like in the
         [Required]
         [MaxLength(100)]
         public string Name {get; set;}
+        [JsonIgnore]
         public virtual ICollection<IngredientEntity> ListOfIngredients {get; set;}
 
         [Required]

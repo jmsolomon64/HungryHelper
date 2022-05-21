@@ -9,5 +9,7 @@ namespace HungryHelper.Services.FavoritedRecipes
         Task<FavoritedRecipesRead> GetFavoritedRecipesByUserIdAsync(int userId);
         
         Task<bool> DeleteFavoritedRecipesByIdAsync(int id);
+        
+        List<FavoritedRecipesCreate> ViewAllFavoritedRecipes();
     }
 }

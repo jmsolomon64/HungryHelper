@@ -10,9 +10,7 @@ namespace HungryHelper.WebAPI.Controllers
     public class FavoritedRecipesController : ControllerBase
     {
         private readonly IFavoritedRecipesService _service;
-
         private readonly ISeedDataService _seed;
-
         public FavoritedRecipesController(IFavoritedRecipesService service, ISeedDataService seed)
         {
             _service = service;
@@ -48,6 +46,20 @@ namespace HungryHelper.WebAPI.Controllers
             }
 
             return Ok(favoritedRecipesResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllFavoritedRecipes()
+        {
+            await _seed.SeedFavoritedRecipesAsync(); // Calls method to add favorited recipes seed data to DB
+            List<FavoritedRecipesCreate> favoritedRecipes = _service.ViewAllFavoritedRecipes();
+
+            if (favoritedRecipes is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(favoritedRecipes);
         }
 
         [HttpDelete("{id:int}")]
