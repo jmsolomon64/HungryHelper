@@ -46,6 +46,24 @@ namespace HungryHelper.Services.FavoritedRecipes
             return favoritedRecipesEntity;
         }
 
+        public List<FavoritedRecipesCreate> ViewAllFavoritedRecipes()
+        {
+            List<FavoritedRecipesCreate> listOfFavoritedRecipes = new List<FavoritedRecipesCreate>();
+            var entity = _context.FavoritedRecipes;
+            foreach (var favoritedRecipe in entity)
+            {
+                var favRecipe = new FavoritedRecipesCreate()
+                {
+                    Id = favoritedRecipe.Id,
+                    UserId = favoritedRecipe.UserId,
+                    RecipeId = favoritedRecipe.RecipeId
+                };
+
+                listOfFavoritedRecipes.Add(favRecipe);
+            }
+            return listOfFavoritedRecipes;
+        }
+
         public async Task<bool> DeleteFavoritedRecipesByIdAsync(int Id)
         {
             var FavoritedRecipesEntity = _context.FavoritedRecipes.FirstOrDefault( i => i.Id == Id);
