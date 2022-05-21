@@ -58,5 +58,17 @@ namespace HungryHelper.Services.Ingredient
             };
             return await RegisterIngredientAsync(ingredient);
         }
+
+        public List<IngredientEntity> GetAllIngredients()
+        {
+            List<IngredientEntity> ingredients = new List<IngredientEntity>();
+            var listOfIngredients = _context.Ingredients;
+            foreach (var ingredient in listOfIngredients)
+            {
+                ingredients.Add(ingredient);
+            }
+            
+            return ingredients;
+        }
     }
 }
