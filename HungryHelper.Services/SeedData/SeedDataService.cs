@@ -155,7 +155,21 @@ namespace HungryHelper.Services.SeedData
                     RecipeId = 4,
                 };
 
+                var secondFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1006,
+                    RecipeId = 9,
+                };
+
+                var thirdFavoritedRecipe = new FavoritedRecipesCreate()
+                {
+                    UserId = 1007,
+                    RecipeId = 12,
+                };
+
                 return await _favoritedRecipe.CreateFavoritedRecipesAsync(firstFavoritedRecipe);
+                return await _favoritedRecipe.CreateFavoritedRecipesAsync(secondFavoritedRecipe);
+                return await _favoritedRecipe.CreateFavoritedRecipesAsync(thirdFavoritedRecipe);
             }
             else 
             {
